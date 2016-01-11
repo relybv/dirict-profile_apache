@@ -1,0 +1,10 @@
+fixtures:
+  repositories:
+    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+
+# profile module layout, default include ntp module
+    ntp: "https://github.com/puppetlabs/puppetlabs-ntp.git"
+    apache: "https://github.com/puppetlabs/puppetlabs-apache.git"
+
+  symlinks:
+    profile_apache: "#{source_dir}"
