@@ -11,7 +11,10 @@ class profile_apache
 {
   class { 'apache':
     default_vhost => false,
+    mpm_module    => 'prefork',
   }
+
+  class { 'apache::mod::php': }
 
   apache::vhost { 'ssl.example.com':
     port    => '443',
