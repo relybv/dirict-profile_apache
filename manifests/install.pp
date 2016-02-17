@@ -4,7 +4,13 @@
 #
 class profile_apache::install {
 
-  package { $::profile_apache::package_name:
+  package { $::profile_apache::packages:
     ensure => present,
   }
+
+  class { 'apache':
+    default_vhost => false,
+    mpm_module    => 'prefork',
+  }
+
 }

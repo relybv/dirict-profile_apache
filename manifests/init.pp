@@ -8,17 +8,17 @@
 #   Explanation of what this parameter affects and what it defaults to.
 #
 class profile_apache
-{
-  class { 'apache':
-    default_vhost => false,
-    mpm_module    => 'prefork',
-  }
+(
+  $packages = $::profile_apache::params::packages,
+  $vhost = $::profile_apache::params::vhost,
+  $docroot = $::profile_apache::params::docroot,
+  $ssl_docroot = $::profile_apache::params::ssl_docroot,
+) inherits ::profile_apache::params {
 
-  class { 'apache::mod::php': }
+  # validate parameters here
 
-  apache::vhost { 'ssl.example.com':
-    port    => '443',
-    docroot => '/var/www/ssl',
-    ssl     => true,
-  }
+  class { '::profile_apache::install': } ->
+  class { '::profile_apache::config': } ~>
+  class { '::profile_apache::service': } ->
+  Class['::profile_apache']
 }

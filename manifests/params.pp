@@ -4,14 +4,17 @@
 # It sets variables according to platform.
 #
 class profile_apache::params {
+  $vhost = $::fqdn
+  $docroot = '/var/www'
+  $ssl_docroot = "${docroot}/ssl"
+  $php_packages = ['php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap','php5-xsl','php5-xdebug','php5-mysql','libapache2-mod-php5']
+
   case $::osfamily {
     'Debian': {
-      $package_name = 'profile_apache'
-      $service_name = 'profile_apache'
+      $packages = $php_packages
     }
     'RedHat', 'Amazon': {
-      $package_name = 'profile_apache'
-      $service_name = 'profile_apache'
+      $packages = $php_packages
     }
     default: {
       fail("${::operatingsystem} not supported")
