@@ -13,4 +13,8 @@ class profile_apache::install {
     mpm_module    => 'prefork',
   }
 
+  class { 'apache::mod::php': }
+  class { 'apache::mod::headers': }
+
+
 }
