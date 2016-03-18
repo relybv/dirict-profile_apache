@@ -41,7 +41,6 @@ describe 'profile_apache' do
           it { is_expected.to contain_apache__listen('80') }  
           it { is_expected.to contain_apache__listen('443') }
 
-
         end
       end
     end
