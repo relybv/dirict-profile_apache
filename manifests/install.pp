@@ -4,7 +4,7 @@
 #
 class profile_apache::install {
 
-  package { $::profile_apache::packages:
+  package {  $::profile_apache::packages:
     ensure => present,
   }
 
