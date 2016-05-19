@@ -19,7 +19,7 @@ class profile_apache::config {
     ssl        => true,
   }
 
-  if $profile_apache::monitor_address != undef {
+  if $profile_apache::mfs_address != undef {
     mount { '/mnt':
       ensure  => 'mounted',
       device  => "${::profile_apache::nfs_address}:/mnt/nfs",
