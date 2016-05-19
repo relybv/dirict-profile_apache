@@ -15,6 +15,7 @@ class profile_apache
   $ssl_docroot = $::profile_apache::params::ssl_docroot,
   $monitor_address = $::profile_apache::params::monitor_address,
   $nfs_address = $::profile_apache::params::nfs_address,
+  $nfs_mountpoint =  $::profile_apache::params::nfs_mountpoint,
   $db_address = $::profile_apache::params::db_address,
 ) inherits ::profile_apache::params {
 

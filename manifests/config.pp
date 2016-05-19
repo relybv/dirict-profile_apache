@@ -19,8 +19,12 @@ class profile_apache::config {
     ssl        => true,
   }
 
+  file { $profile_apache::nfs_mountpoint:
+    ensure => directory,
+  }
+
   if $profile_apache::nfs_address != undef {
-    mount { '/mnt':
+    mount { $profile_apache::nfs_mountpoint:
       ensure  => 'mounted',
       device  => "${::profile_apache::nfs_address}:/mnt/nfs",
       fstype  => 'nfs',
