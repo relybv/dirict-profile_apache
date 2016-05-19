@@ -24,12 +24,20 @@ class profile_apache::config {
   }
 
   if $profile_apache::nfs_address != undef {
-    mount { $profile_apache::nfs_mountpoint:
-      ensure  => 'mounted',
-      device  => "${::profile_apache::nfs_address}:/mnt/nfs",
-      fstype  => 'nfs',
+#    mount { $profile_apache::nfs_mountpoint:
+#      ensure  => 'mounted',
+#      device  => "${::profile_apache::nfs_address}:/mnt/nfs",
+#      fstype  => 'nfs',
+#      options => 'intr,soft',
+#      atboot  => true,
+#    }
+
+    nfs::client::mount { $profile_apache::nfs_mountpoint:
+      server  => $profile_apache::nfs_address,
+      share   => $profile_apache::nfs_mountpoint,
       options => 'intr,soft',
       atboot  => true,
     }
+
   }
 }

@@ -4,14 +4,9 @@
 #
 class profile_apache::install {
 
+  include nfs::client
   # install packages
   ensure_packages( $::profile_apache::packages )
-
-  if ! defined(Class['nfs']) {
-    package { 'nfs-common':
-        ensure => installed,
-    }
-  }
 
   class { 'apache':
     default_vhost => false,
