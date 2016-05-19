@@ -4,9 +4,8 @@
 #
 class profile_apache::install {
 
-  package {  $::profile_apache::packages:
-    ensure => present,
-  }
+  # install packages
+  ensure_packages( $::profile_apache::packages )
 
   class { 'apache':
     default_vhost => false,
