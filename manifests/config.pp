@@ -30,7 +30,7 @@ class profile_apache::config {
 
     nfs::client::mount { $profile_apache::nfs_mountpoint:
       server  => $profile_apache::nfs_address,
-      share   => $profile_apache::nfs_mountpoint,
+      share   => '/mnt/nfs',
       options => 'intr,soft',
       atboot  => true,
     }
