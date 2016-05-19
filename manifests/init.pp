@@ -15,9 +15,14 @@ class profile_apache
   $ssl_docroot = $::profile_apache::params::ssl_docroot,
   $monitor_address = $::profile_apache::params::monitor_address,
   $nfs_address = $::profile_apache::params::nfs_address,
+  $db_address = $::profile_apache::params::db_address,
 ) inherits ::profile_apache::params {
 
   # validate parameters here
+
+  notify {"addr from init: monitor ${monitor_address}, nfs ${nfs_address}, db ${db_address}":
+    withpath => true,
+  }
 
   class { '::profile_apache::install': } ->
   class { '::profile_apache::config': } ~>
