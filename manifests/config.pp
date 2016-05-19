@@ -24,7 +24,7 @@ class profile_apache::config {
       ensure  => 'mounted',
       device  => "${::profile_apache::nfs_address}:/mnt/nfs",
       fstype  => 'nfs',
-      options => 'defaults',
+      options => 'intr,soft',
       atboot  => true,
     }
   }
