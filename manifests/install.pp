@@ -7,7 +7,7 @@ class profile_apache::install {
   # install packages
   ensure_packages( $::profile_apache::packages )
 
-  if ! defined(Package['nfs-common']) {
+  if ! defined(Class['nfs']) {
     package { 'nfs-common':
         ensure => installed,
     }
