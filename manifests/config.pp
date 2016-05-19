@@ -38,6 +38,10 @@ class profile_apache::config {
       options => 'intr,soft',
       atboot  => true,
     }
-
+    else {
+      file { $profile_apache::nfs_mountpoint:
+        ensure => directory,
+      }  
+    }
   }
 }
