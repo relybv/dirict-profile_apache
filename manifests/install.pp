@@ -10,6 +10,8 @@ class profile_apache::install {
 
   # create logpath
   $logpath = dirname($::profile_apache::access_log_file)
+  $rootpath = dirname($::profile_apache::docroot)
+
   notify {"logpath ${logpath}":}
   exec { $logpath:
     # mode? uid/gid? you decide...
@@ -17,6 +19,12 @@ class profile_apache::install {
     creates => $logpath,
   }
 
+  notify {"rootpath ${rootpath}":}
+  exec { $rootpath:
+    # mode? uid/gid? you decide...
+    command => "/bin/mkdir -p ${rootpath}",
+    creates => $rootpath,
+  }
 
   class { 'apache':
     default_vhost          => false,
