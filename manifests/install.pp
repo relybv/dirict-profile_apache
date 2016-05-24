@@ -10,6 +10,7 @@ class profile_apache::install {
 
   # create logpath
   $logpath = dirname($::profile_apache::access_log_file)
+  notify {"logpath ${logpath}":}
   exec { $logpath:
     # mode? uid/gid? you decide...
     command => "/bin/mkdir -p ${logpath}",
