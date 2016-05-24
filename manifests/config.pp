@@ -25,11 +25,13 @@ class profile_apache::config {
     logroot         => $::profile_apache::logroot,
     ssl             => true,
     directories     => [
-      { path    => '/usr/lib/cgi-bin',
-        overide => [ 'None' ],
-      },
       { path    => $profile_apache::docroot,
         overide => [ $profile_apache::override ],
+        options => ['Indexes','FollowSymLinks','MultiViews'],
+      },
+      { path    => '/usr/lib/cgi-bin',
+        overide => [ 'None' ],
+        options => ['+ExecCGI','-MultiViews','+SymLinksIfOwnerMatch'],
       },
     ],
   }
