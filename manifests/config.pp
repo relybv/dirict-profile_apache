@@ -25,7 +25,7 @@ class profile_apache::config {
     ssl             => true,
     directories     => [
       { path        => $profile_apache::docroot,
-        override    => [ 'ALL' ],
+        allow_override    => [ 'ALL' ],
         options     => [ 'Indexes','FollowSymLinks','MultiViews' ],
       },
       { path    => '/usr/lib/cgi-bin',
