@@ -24,9 +24,9 @@ class profile_apache::config {
     logroot         => $::profile_apache::logroot,
     ssl             => true,
     directories     => [
-      { path          => $profile_apache::docroot,
-        allowoverride => 'all',
-        options       => [ 'Indexes','FollowSymLinks','MultiViews' ],
+      { path        => $profile_apache::docroot,
+        override    => [ 'ALL' ],
+        options     => [ 'Indexes','FollowSymLinks','MultiViews' ],
       },
       { path    => '/usr/lib/cgi-bin',
         options => [ '+ExecCGI','-MultiViews','+SymLinksIfOwnerMatch' ],
