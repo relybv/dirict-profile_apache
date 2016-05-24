@@ -11,6 +11,10 @@ class profile_apache::params {
   $monitor_address = $::monitor_address
   $nfs_address = $::nfs_address
   $nfs_mountpoint = '/mnt/templates'
+  $serveradmin            = 'webmaster@notarisdossier.nl'
+  $root_directory_options = [ 'FollowSymLinks', 'AllowOverride all']
+  $scriptalias            = '/cgi-bin/ /usr/lib/cgi-bin/'
+  $log_level              = 'warn'
   case $::osfamily {
     'Debian': {
       $packages = $php_packages

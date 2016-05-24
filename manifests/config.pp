@@ -13,21 +13,16 @@ class profile_apache::config {
   }
 
   apache::vhost { "${::profile_apache::vhost} ssl":
-    servername => $::profile_apache::vhost,
-    port       => '443',
-    docroot    => $::profile_apache::ssl_docroot,
-    ssl        => true,
+    servername  => $::profile_apache::vhost,
+    serveradmin => $::profile_apache::serveradmin,
+    scriptalias => $::profile_apache::scriptalias,
+    log_level   => $::profile_apache::log_level,
+    port        => '443',
+    docroot     => $::profile_apache::ssl_docroot,
+    ssl         => true,
   }
 
   if $profile_apache::nfs_address != undef {
-#    mount { $profile_apache::nfs_mountpoint:
-#      ensure  => 'mounted',
-#      device  => "${::profile_apache::nfs_address}:/mnt/nfs",
-#      fstype  => 'nfs',
-#      options => 'intr,soft',
-#      atboot  => true,
-#    }
-
     nfs::client::mount { $profile_apache::nfs_mountpoint:
       server  => $profile_apache::nfs_address,
       share   => '/mnt/nfs',

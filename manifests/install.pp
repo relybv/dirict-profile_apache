@@ -9,8 +9,9 @@ class profile_apache::install {
   ensure_packages( $::profile_apache::packages )
 
   class { 'apache':
-    default_vhost => false,
-    mpm_module    => 'prefork',
+    default_vhost          => false,
+    mpm_module             => 'prefork',
+    root_directory_options => $::profile_apache::root_directory_options,
   }
 
   class { 'apache::mod::php': }
