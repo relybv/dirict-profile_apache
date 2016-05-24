@@ -4,14 +4,6 @@
 #
 class profile_apache::config {
 
-  $logpath = dirname($::profile_apache::access_log_file)
-
-  exec { $logpath:
-    # mode? uid/gid? you decide...
-    command => "/bin/mkdir -p ${logpath}",
-    creates => $logpath,
-  }
-
   apache::vhost { "${::profile_apache::vhost} non-ssl":
     servername      => $::profile_apache::vhost,
     port            => '80',
@@ -31,7 +23,7 @@ class profile_apache::config {
     port            => '443',
     docroot         => $::profile_apache::ssl_docroot,
     ssl             => true,
-    require         => Exec[ $logpath ],
+    require         => Exec[ $::logpath ],
   }
 
   if $profile_apache::nfs_address != undef {
