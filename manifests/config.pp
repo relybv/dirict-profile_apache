@@ -3,8 +3,13 @@
 # This class is called from profile_apache for service config.
 #
 class profile_apache::config {
-  file { dirname($::profile_apache::access_log_file):
-    ensure => directory,
+
+  $logpath = dirname($::profile_apache::access_log_file)
+
+  exec { $logpath:
+    # mode? uid/gid? you decide...
+    command => "/bin/mkdir -p ${logpath}",
+    creates => $logpath,
   }
 
   apache::vhost { "${::profile_apache::vhost} non-ssl":
@@ -26,7 +31,7 @@ class profile_apache::config {
     port            => '443',
     docroot         => $::profile_apache::ssl_docroot,
     ssl             => true,
-    require         => File[ "dirname(${::profile_apache::access_log_file}" ],
+    require         => Exec[ $logpath ],
   }
 
   if $profile_apache::nfs_address != undef {
