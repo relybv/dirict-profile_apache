@@ -33,6 +33,9 @@ class profile_apache::install {
 
   class { 'apache::mod::php': }
   class { 'apache::mod::headers': }
+  class { 'apache::mod::ssl':
+    ssl_compression => false,
+  }
 
 
 }
