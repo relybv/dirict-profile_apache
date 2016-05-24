@@ -17,7 +17,6 @@ class profile_apache::config {
     serveradmin     => $::profile_apache::serveradmin,
     scriptalias     => $::profile_apache::scriptalias,
     log_level       => $::profile_apache::log_level,
-    override        => $::profile_apache::override,
     error_log_file  => $::profile_apache::error_log_file,
     access_log_file => $::profile_apache::access_log_file,
     port            => '443',
@@ -26,7 +25,7 @@ class profile_apache::config {
     ssl             => true,
     directories     => [
       { path     => $profile_apache::docroot,
-        override => [ $profile_apache::override ],
+        override => [ 'All' ],
         options  => ['Indexes','FollowSymLinks','MultiViews'],
       },
       { path     => '/usr/lib/cgi-bin',

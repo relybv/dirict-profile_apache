@@ -20,7 +20,6 @@ class profile_apache
   $root_directory_options = $::profile_apache::params::root_directory_options,
   $scriptalias = $::profile_apache::params::scriptalias,
   $log_level = $::profile_apache::params::log_level,
-  $override = $::profile_apache::params::override,
   $logroot = $::profile_apache::params::logroot,
   $access_log_file = $::profile_apache::params::access_log_file,
   $error_log_file = $::profile_apache::params::error_log_file,

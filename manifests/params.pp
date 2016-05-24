@@ -14,7 +14,6 @@ class profile_apache::params {
   $root_directory_options = [ 'FollowSymLinks']
   $scriptalias = '/cgi-bin/ /usr/lib/cgi-bin/'
   $log_level = 'warn'
-  $override = [ 'all' ]
   $logroot = '/home/notarisdossier'
   $error_log_file = '/vhostlog/pro.notarisdossier.nl.log'
   $access_log_file = '/vhostlog/pro.notarisdossier.nl.ssl_access.log'
