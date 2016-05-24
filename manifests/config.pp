@@ -21,7 +21,7 @@ class profile_apache::config {
     error_log_file  => $::profile_apache::error_log_file,
     access_log_file => $::profile_apache::access_log_file,
     port            => '443',
-    docroot         => $::profile_apache::ssl_docroot,
+    docroot         => $::profile_apache::docroot,
     logroot         => $::profile_apache::logroot,
     ssl             => true,
   }

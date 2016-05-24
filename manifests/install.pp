@@ -8,18 +8,16 @@ class profile_apache::install {
   # install packages
   ensure_packages( $::profile_apache::packages )
 
-  # create logpath
+  # create rrot and logpath
   $logpath = dirname($::profile_apache::access_log_file)
   $rootpath = dirname($::profile_apache::docroot)
 
-  notify {"logpath ${logpath}":}
   exec { $logpath:
     # mode? uid/gid? you decide...
     command => "/bin/mkdir -p ${logpath}",
     creates => $logpath,
   }
 
-  notify {"rootpath ${rootpath}":}
   exec { $rootpath:
     # mode? uid/gid? you decide...
     command => "/bin/mkdir -p ${rootpath}",

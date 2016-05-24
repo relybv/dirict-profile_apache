@@ -12,7 +12,6 @@ class profile_apache
   $packages = $::profile_apache::params::packages,
   $vhost = $::profile_apache::params::vhost,
   $docroot = $::profile_apache::params::docroot,
-  $ssl_docroot = $::profile_apache::params::ssl_docroot,
   $monitor_address = $::profile_apache::params::monitor_address,
   $nfs_address = $::profile_apache::params::nfs_address,
   $nfs_mountpoint =  $::profile_apache::params::nfs_mountpoint,
