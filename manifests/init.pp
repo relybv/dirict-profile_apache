@@ -22,6 +22,7 @@ class profile_apache
   $scriptalias = $::profile_apache::params::scriptalias,
   $log_level = $::profile_apache::params::log_level,
   $override = $::profile_apache::params::override,
+  $logroot = $::profile_apache::params::logroot,
   $access_log_file = $::profile_apache::params::access_log_file,
   $error_log_file = $::profile_apache::params::error_log_file,
 ) inherits ::profile_apache::params {

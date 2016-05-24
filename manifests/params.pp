@@ -16,8 +16,9 @@ class profile_apache::params {
   $scriptalias = '/cgi-bin/ /usr/lib/cgi-bin/'
   $log_level = 'warn'
   $override = [ 'all' ]
+  $logroot = '/home/notarisdossier'
   $error_log_file = '/home/notarisdossier/vhostlog/pro.notarisdossier.nl.log'
-  $access_log_file = '/home/notarisdossier/vhostlog/pro.notarisdossier.nl.ssl_access.log'
+  $access_log_file = '/vhostlog/pro.notarisdossier.nl.ssl_access.log'
   case $::osfamily {
     'Debian': {
       $packages = $php_packages
