@@ -28,6 +28,9 @@ class profile_apache::config {
       { path    => '/usr/lib/cgi-bin',
         overide => [ 'None' ],
       },
+      { path    => $profile_apache::docroot,
+        overide => [ $profile_apache::override ],
+      },
     ],
   }
 
