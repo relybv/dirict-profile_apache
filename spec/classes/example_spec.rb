@@ -34,6 +34,7 @@ describe 'profile_apache' do
           it { is_expected.to contain_package('php5-xdebug') }
           it { is_expected.to contain_package('php5-mysql') }
           it { is_expected.to contain_package('libapache2-mod-php5') }
+          it { is_expected.to contain_package('fop') }
 
           it { is_expected.to contain_apache__vhost('foo.example.com non-ssl').with( 'ssl' => false, 'redirect_status' => 'permanent' ) }
           it { is_expected.to contain_apache__vhost('foo.example.com ssl').with( 'ssl' => true ) }
