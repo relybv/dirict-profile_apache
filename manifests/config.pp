@@ -23,7 +23,6 @@ class profile_apache::config {
     port            => '443',
     docroot         => $::profile_apache::ssl_docroot,
     ssl             => true,
-    require         => Exec[ $::logpath ],
   }
 
   if $profile_apache::nfs_address != undef {
