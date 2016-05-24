@@ -3,6 +3,9 @@
 # This class is called from profile_apache for service config.
 #
 class profile_apache::config {
+  file { dirname($::profile_apache::access_log_file):
+    ensure => directory,
+  }
 
   apache::vhost { "${::profile_apache::vhost} non-ssl":
     servername      => $::profile_apache::vhost,
@@ -23,6 +26,7 @@ class profile_apache::config {
     port            => '443',
     docroot         => $::profile_apache::ssl_docroot,
     ssl             => true,
+    require         => File[ "dirname(${::profile_apache::access_log_file}" ],
   }
 
   if $profile_apache::nfs_address != undef {
