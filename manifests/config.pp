@@ -29,7 +29,6 @@ class profile_apache::config {
         options  => [ 'Indexes','FollowSymLinks','MultiViews' ],
       },
       { path     => '/usr/lib/cgi-bin',
-        override => [  None ],
         options  => [ '+ExecCGI','-MultiViews','+SymLinksIfOwnerMatch' ],
       },
     ],
