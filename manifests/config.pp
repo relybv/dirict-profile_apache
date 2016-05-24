@@ -25,12 +25,12 @@ class profile_apache::config {
     ssl             => true,
     directories     => [
       { path     => $profile_apache::docroot,
-        override => [ 'All' ],
-        options  => ['Indexes','FollowSymLinks','MultiViews'],
+        override => [ 'all' ],
+        options  => [ 'Indexes','FollowSymLinks','MultiViews' ],
       },
       { path     => '/usr/lib/cgi-bin',
-        override => [ 'None' ],
-        options  => ['+ExecCGI','-MultiViews','+SymLinksIfOwnerMatch'],
+        override => [  'None' ],
+        options  => [ '+ExecCGI','-MultiViews','+SymLinksIfOwnerMatch' ],
       },
     ],
   }
