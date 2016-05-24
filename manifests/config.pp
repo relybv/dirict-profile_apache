@@ -13,14 +13,16 @@ class profile_apache::config {
   }
 
   apache::vhost { "${::profile_apache::vhost} ssl":
-    servername  => $::profile_apache::vhost,
-    serveradmin => $::profile_apache::serveradmin,
-    scriptalias => $::profile_apache::scriptalias,
-    log_level   => $::profile_apache::log_level,
-    override    => $::profile_apache::override,
-    port        => '443',
-    docroot     => $::profile_apache::ssl_docroot,
-    ssl         => true,
+    servername      => $::profile_apache::vhost,
+    serveradmin     => $::profile_apache::serveradmin,
+    scriptalias     => $::profile_apache::scriptalias,
+    log_level       => $::profile_apache::log_level,
+    override        => $::profile_apache::override,
+    error_log_file  => $::profile_apache::error_log_file,
+    access_log_file => $::profile_apache::access_log_file,
+    port            => '443',
+    docroot         => $::profile_apache::ssl_docroot,
+    ssl             => true,
   }
 
   if $profile_apache::nfs_address != undef {
