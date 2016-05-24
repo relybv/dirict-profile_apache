@@ -24,6 +24,11 @@ class profile_apache::config {
     docroot         => $::profile_apache::docroot,
     logroot         => $::profile_apache::logroot,
     ssl             => true,
+    directories     => [
+      { path    => '/usr/lib/cgi-bin',
+        overide => [ 'None' ],
+      },
+    ],
   }
 
   if $profile_apache::nfs_address != undef {
