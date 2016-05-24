@@ -17,6 +17,7 @@ class profile_apache::config {
     serveradmin => $::profile_apache::serveradmin,
     scriptalias => $::profile_apache::scriptalias,
     log_level   => $::profile_apache::log_level,
+    override    => $::profile_apache::override,
     port        => '443',
     docroot     => $::profile_apache::ssl_docroot,
     ssl         => true,
