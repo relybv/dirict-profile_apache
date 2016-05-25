@@ -23,6 +23,9 @@ class profile_apache
   $logroot = $::profile_apache::params::logroot,
   $access_log_file = $::profile_apache::params::access_log_file,
   $error_log_file = $::profile_apache::params::error_log_file,
+  $ssl_cert = $::profile_apache::params::ssl_cert,
+  $ssl_key =  $::profile_apache::params::ssl_key,
+  $ssl_chain = $::profile_apache::params::ssl_chain,
 ) inherits ::profile_apache::params {
 
   # validate parameters here

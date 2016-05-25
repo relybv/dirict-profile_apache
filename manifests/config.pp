@@ -26,9 +26,9 @@ class profile_apache::config {
     ssl_honorcipherorder => 'On',
     ssl_cipher           => 'ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:HIGH:!MD5:!aNULL:!EDH',
     ssl_protocol         => 'All -SSLv2',
-    ssl_cert             => '/etc/ssl/ssl_notarisdossier/pro_notarisdossier_nl/pro_notarisdossier_nl.crt',
-    ssl_key              => '/etc/ssl/ssl_notarisdossier/pro_notarisdossier_nl.key',
-    ssl_chain            => '/etc/ssl/ssl_notarisdossier/pro_notarisdossier_nl/InstantSSL_Bundle.crt',
+    ssl_cert             => $::profile_apache::ssl_cert,
+    ssl_key              => $::profile_apache::ssl_key,
+    ssl_chain            => $::profile_apache::ssl_chain,
     directories          => [
       { path           => $profile_apache::docroot,
         allow_override => [ 'ALL' ],

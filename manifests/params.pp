@@ -17,6 +17,11 @@ class profile_apache::params {
   $logroot = '/home/notarisdossier'
   $error_log_file = '/vhostlog/pro.notarisdossier.nl.log'
   $access_log_file = '/vhostlog/pro.notarisdossier.nl.ssl_access.log'
+  # use undef ssl setting for default, use hieradata to distribute production keys
+  $ssl_cert = undef
+  $ssl_key = undef
+  $ssl_chain = undef
+
   case $::osfamily {
     'Debian': {
       $packages = $php_packages

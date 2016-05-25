@@ -5,6 +5,7 @@
 class profile_apache::install {
 
   include nfs::client
+
   # install packages
   ensure_packages( $::profile_apache::packages )
 
@@ -24,6 +25,15 @@ class profile_apache::install {
     creates => $rootpath,
   }
 
+  # create certificate path only if certificate is defined
+  if $profile_apache::ssl_cert != undef {
+    $certpath = dirname($::profile_apache::ssl_cert)
+      exec { $certpath:
+      command => "/bin/mkdir -p ${certpath}",
+      creates => $certpath,
+    }
+  }
+
   class { 'apache':
     default_vhost          => false,
     mpm_module             => 'prefork',
@@ -36,6 +46,5 @@ class profile_apache::install {
   class { 'apache::mod::ssl':
     ssl_compression => false,
   }
-
 
 }
