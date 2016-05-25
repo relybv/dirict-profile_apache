@@ -12,7 +12,6 @@ class profile_apache::install {
   # create root and logpath
   $logpath = dirname( "${::profile_apache::logroot}${::profile_apache::error_log_file}" )
   $rootpath = dirname( $::profile_apache::docroot )
-  notify {"logpath = $logpath": }
 
   exec { $logpath:
     # mode? uid/gid? you decide...
