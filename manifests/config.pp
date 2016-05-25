@@ -45,6 +45,12 @@ class profile_apache::config {
     ],
   }
 
+  file { "${::profile_apache::docroot}/working.html":
+    ensure => present,
+    content => template('profile_apache/working.html.erb'),
+    mode => '0644';
+  }
+
   if $profile_apache::nfs_address != undef {
     nfs::client::mount { $profile_apache::nfs_mountpoint:
       server  => $profile_apache::nfs_address,
