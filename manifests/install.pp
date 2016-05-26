@@ -9,9 +9,9 @@ class profile_apache::install {
   # install packages
   ensure_packages( $::profile_apache::packages )
 
-  # create rrot and logpath
-  $logpath = dirname($::profile_apache::access_log_file)
-  $rootpath = dirname($::profile_apache::docroot)
+  # create root and logpath
+  $logpath = dirname( "${::profile_apache::logroot}${::profile_apache::error_log_file}" )
+  $rootpath = dirname( $::profile_apache::docroot )
 
   exec { $logpath:
     # mode? uid/gid? you decide...

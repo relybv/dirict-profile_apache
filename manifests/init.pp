@@ -16,6 +16,7 @@ class profile_apache
   $nfs_address = $::profile_apache::params::nfs_address,
   $nfs_mountpoint =  $::profile_apache::params::nfs_mountpoint,
   $db_address = $::profile_apache::params::db_address,
+  $win_address = $::profile_apache::params::win_address,
   $serveradmin = $::profile_apache::params::serveradmin,
   $root_directory_options = $::profile_apache::params::root_directory_options,
   $scriptalias = $::profile_apache::params::scriptalias,
@@ -31,9 +32,7 @@ class profile_apache
 
   # validate parameters here
 
-  notify {"addr from init: monitor ${monitor_address}, nfs ${nfs_address}, db ${db_address}":
-    withpath => true,
-  }
+  notify {"addr from init: monitor ${monitor_address}, nfs ${nfs_address}, db ${db_address}, win ${win_address}": }
 
   class { '::profile_apache::install': } ->
   class { '::profile_apache::config': } ~>
