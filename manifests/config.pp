@@ -5,11 +5,11 @@
 class profile_apache::config {
 
   apache::vhost { "${::profile_apache::vhost} non-ssl":
-    servername      => $::profile_apache::vhost,
-    port            => '80',
-    docroot         => $::profile_apache::docroot,
-    redirect_status => "permanent-${::profile_apache::vhost}",
-    redirect_dest   => "https://${::profile_apache::ext_lb_fqdn}/",
+    servername => $::profile_apache::vhost,
+    port       => '80',
+    docroot    => $::profile_apache::docroot,
+#    redirect_status => "permanent",
+#    redirect_dest   => "https://${::profile_apache::ext_lb_fqdn}/",
   }
 
   apache::vhost { "${::profile_apache::vhost} ssl":
@@ -45,10 +45,17 @@ class profile_apache::config {
     ],
   }
 
+  file { "${::profile_apache::docroot}/index.html":
+    ensure  => present,
+    content => template('profile_apache/redirect.html.erb'),
+    mode    => '0644',
+    replace => false,
+  }
+
   file { "${::profile_apache::docroot}/working.html":
-    ensure => present,
+    ensure  => present,
     content => template('profile_apache/working.html.erb'),
-    mode => '0644';
+    mode    => '0644',
   }
 
   if $profile_apache::nfs_address != undef {
