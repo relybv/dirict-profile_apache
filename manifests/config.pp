@@ -9,8 +9,8 @@ class profile_apache::config {
     port            => '80',
     docroot         => $::profile_apache::docroot,
     redirect_status => 'permanent',
-    redirect_dest   => "https:://${::profile_apache::ext_lb_fqdn}/",
-#    redirect_dest   => "https:://${::profile_apache::vhost}/",
+    redirect_dest   => "https://${::profile_apache::ext_lb_fqdn}/",
+#    redirect_dest   => "https://${::profile_apache::vhost}/",
   }
 
   apache::vhost { "${::profile_apache::vhost} ssl":
