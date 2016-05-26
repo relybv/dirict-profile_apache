@@ -21,6 +21,7 @@ class profile_apache::params {
   $ssl_cert = undef
   $ssl_key = undef
   $ssl_chain = undef
+  $ext_lb_fqdn = $::ext_lb_fqdn
 
   case $::osfamily {
     'Debian': {

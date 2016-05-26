@@ -26,6 +26,7 @@ class profile_apache
   $ssl_cert = $::profile_apache::params::ssl_cert,
   $ssl_key =  $::profile_apache::params::ssl_key,
   $ssl_chain = $::profile_apache::params::ssl_chain,
+  $ext_lb_fqdn = $::profile_apache::params::ext_lb_fqdn,
 ) inherits ::profile_apache::params {
 
   # validate parameters here
