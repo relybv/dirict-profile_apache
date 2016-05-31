@@ -16,6 +16,16 @@ class profile_apache::config {
     mode    => '0600',
   }
 
+  file { '/home/notarisdossier/.ssh/authorized_keys':
+    ensure  => present,
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
+    mode    => '0600',
+    require => File['/home/notarisdossier/.ssh'],
+  }
+
+  create_resources('profile_apache::notarisdossier_user_keys', hiera("ssh_keys"))
+
   apache::vhost { "${::profile_apache::vhost} non-ssl":
     servername => $::profile_apache::vhost,
     port       => '80',
