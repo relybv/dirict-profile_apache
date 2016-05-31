@@ -9,11 +9,6 @@ class profile_apache::install {
   # install packages
   ensure_packages( $::profile_apache::packages )
 
-  # create user
-  user { 'notarisdossier':
-    ensure => present,
-  }
-
   # create root and logpath
   $logpath = dirname( "${::profile_apache::logroot}${::profile_apache::error_log_file}" )
   $rootpath = dirname( $::profile_apache::docroot )

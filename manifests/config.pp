@@ -4,6 +4,18 @@
 #
 class profile_apache::config {
 
+  # create user
+  user { 'notarisdossier':
+    ensure => present,
+  }
+
+  file { '/home/notarisdossier/.ssh':
+    ensure  => directory,
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
+    mode    => '0600',
+  }
+
   apache::vhost { "${::profile_apache::vhost} non-ssl":
     servername => $::profile_apache::vhost,
     port       => '80',
@@ -73,7 +85,7 @@ class profile_apache::config {
     ensure => directory,
   }
 
-  file { '/mnt/nfs//config/local.php':
+  file { '/mnt/nfs/config/local.php':
     ensure  => present,
     content => template('profile_apache/local.php.erb'),
     mode    => '0644',
