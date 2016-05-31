@@ -19,24 +19,50 @@ class profile_apache::install {
   $rootpath = dirname( $::profile_apache::docroot )
 
   exec { $logpath:
-    # mode? uid/gid? you decide...
     command => "/bin/mkdir -p ${logpath}",
     creates => $logpath,
   }
 
   exec { $rootpath:
-    # mode? uid/gid? you decide...
     command => "/bin/mkdir -p ${rootpath}",
     creates => $rootpath,
   }
 
-  # create certificate path only if certificate is defined
-  if ($profile_apache::ssl_cert != undef) and ($profile_apache::ssl_cert != '') {
-    $certpath = dirname($::profile_apache::ssl_cert)
-    exec { $certpath:
-      command => "/bin/mkdir -p ${certpath}",
-      creates => $certpath,
+  # replace empty certs with undef
+  if $profile_apache::ssl_cert == '' {
+    $ssl_cert = undef
+  }
+  else {
+    $ssl_cert = $::profile_apache::ssl_cert
+  }
+
+  if $ssl_cert != undef {
+    exec { 'mk_cert_path':
+      command => '/bin/mkdir -p /etc/ssl/certs; /bin/mkdir -p /etc/ssl/private',
+      creates => '/etc/ssl/certs',
     }
+    file { '/etc/ssl/certs/ssl-cert-default.pem':
+      content =>  $ssl_cert,
+    }
+    $ssl_cert_path = '/etc/ssl/certs/ssl-cert-default.pem'
+  }
+
+  if $profile_apache::ssl_key == '' {
+    $ssl_key = undef
+  }
+  else {
+    $ssl_key = $::profile_apache::ssl_key
+  }
+
+  if $ssl_key != undef {
+    exec { 'mk_key_path':
+      command => '/bin/mkddir -p /etc/ssl/private',
+      creates => '/etc/ssl/private',
+    }
+    file { '/etc/ssl/private/ssl-cert-default.key':
+      content =>  $ssl_key,
+    }
+    $ssl_key_path = '/etc/ssl/private/ssl-cert-default.key'
   }
 
   class { 'apache':

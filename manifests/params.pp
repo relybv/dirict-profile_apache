@@ -20,7 +20,6 @@ class profile_apache::params {
   # use undef ssl setting for default, use hieradata to distribute production keys
   $ssl_cert = undef
   $ssl_key = undef
-  $ssl_chain = undef
   $ext_lb_fqdn = $::ext_lb_fqdn
   $db_password = 'changeme'
   $dirict_username = 'dirict'
