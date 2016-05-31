@@ -26,9 +26,9 @@ class profile_apache::install {
   }
 
   # create certificate path only if certificate is defined
-  if $profile_apache::ssl_cert != undef {
+  if ($profile_apache::ssl_cert != undef) and ($profile_apache::ssl_cert != '') {
     $certpath = dirname($::profile_apache::ssl_cert)
-      exec { $certpath:
+    exec { $certpath:
       command => "/bin/mkdir -p ${certpath}",
       creates => $certpath,
     }

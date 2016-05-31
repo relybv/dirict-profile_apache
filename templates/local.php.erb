@@ -1,0 +1,38 @@
+
+<?php
+ 
+return array(
+    'db'=> array(
+        'driver' => 'pdo',
+        'dsn' => 'mysql:dbname=nd_core;host=<%= scope['profile_apache::db_address'] %>',
+        'user' => 'nd-app',
+        'password' => '<%= scope['profile_apache::db_password'] %>'
+    ),
+    'application' => array(
+        'server_info' => array(
+            'tail' => '/home/notarisdossier<%= scope['profile_apache::error_log_file'] %>'
+        )
+    ),
+    'document' => array(
+        'azure' => array(
+            'account' => '<%= scope['profile_apache::azure_account'] %>',
+            'access_key' => '<%= scope['profile_apache::azure_access_key'] %>'
+        ),
+        'conscribo' => array(
+            'server' => '<%= scope['profile_apache::win_address'] %>'
+        ),
+    ),
+    'connection' => array(
+        'kvk_webservice' => array(
+            'dirict_username' => '<%= scope['profile_apache::webservices_dirict_username'] %>',
+            'dirict_password' => '<%= scope['profile_apache::webservices_dirict_password'] %>'
+        )
+    ),
+    'remote_filesystems' => array(
+        'diricttemplates' => array(
+            'options' => array(
+                'password' => '<%= scope['profile_apache::webdav_dirict_templates_password'] %>'
+            )
+        )
+    )
+);

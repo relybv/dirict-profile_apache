@@ -8,8 +8,6 @@ class profile_apache::config {
     servername => $::profile_apache::vhost,
     port       => '80',
     docroot    => $::profile_apache::docroot,
-#    redirect_status => "permanent",
-#    redirect_dest   => "https://${::profile_apache::ext_lb_fqdn}/",
   }
 
   apache::vhost { "${::profile_apache::vhost} ssl":
@@ -71,4 +69,16 @@ class profile_apache::config {
       ensure => directory,
     }
   }
+
+  file { '/mnt/nfs/config':
+    ensure => directory,
+  }
+
+  file { '/mnt/nfs//config/local.php':
+    ensure  => present,
+    content => template('profile_apache/local.php.erb'),
+    mode    => '0644',
+    require => File['/mnt/nfs/config'],
+  }
+
 }

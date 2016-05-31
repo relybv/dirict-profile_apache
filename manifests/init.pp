@@ -28,6 +28,14 @@ class profile_apache
   $ssl_key =  $::profile_apache::params::ssl_key,
   $ssl_chain = $::profile_apache::params::ssl_chain,
   $ext_lb_fqdn = $::profile_apache::params::ext_lb_fqdn,
+  $db_password = $::profile_apache::params::db_password,
+  $dirict_username = $::profile_apache::params::dirict_username,
+  $dirict_password = $::profile_apache::params::dirict_password,
+  $azure_account = $::profile_apache::params::azure_account,
+  $azure_access_key = $::profile_apache::params::azure_access_key,
+  $webservices_dirict_username = $::profile_apache::params::webservices_dirict_username,
+  $webservices_dirict_password = $::profile_apache::params::webservices_dirict_password,
+  $webdav_dirict_templates_password = $::profile_apache::params::webdav_dirict_templates_password,
 ) inherits ::profile_apache::params {
 
   # validate parameters here

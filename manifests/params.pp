@@ -22,6 +22,14 @@ class profile_apache::params {
   $ssl_key = undef
   $ssl_chain = undef
   $ext_lb_fqdn = $::ext_lb_fqdn
+  $db_password = 'changeme'
+  $dirict_username = 'dirict'
+  $dirict_password = 'changeme'
+  $azure_account = ''
+  $azure_access_key = ''
+  $webservices_dirict_username = 'dirict'
+  $webservices_dirict_password = 'changeme'
+  $webdav_dirict_templates_password = 'changeme'
 
   case $::osfamily {
     'Debian': {
