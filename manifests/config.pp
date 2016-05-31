@@ -7,6 +7,7 @@ class profile_apache::config {
   # create user
   user { 'notarisdossier':
     ensure => present,
+    shell  => '/bin/bash',
   }
 
   file { '/home/notarisdossier/.ssh':
