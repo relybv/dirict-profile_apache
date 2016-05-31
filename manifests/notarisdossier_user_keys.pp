@@ -11,8 +11,8 @@ define profile_apache::notarisdossier_user_keys(
 
   file_line { $user:
     path    => '/home/notarisdossier/.ssh/authorized_keys',
-    line    => "$ssh_key $user",
-    require => File['/home/notarisdossier/.ssh/authorized_keys']
+    line    => "${ssh_key} ${user}}",
+    require => File['/home/notarisdossier/.ssh/authorized_keys'],
   }
 
 }

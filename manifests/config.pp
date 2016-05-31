@@ -10,10 +10,10 @@ class profile_apache::config {
   }
 
   file { '/home/notarisdossier/.ssh':
-    ensure  => directory,
-    owner   => 'notarisdossier',
-    group   => 'notarisdossier',
-    mode    => '0600',
+    ensure => directory,
+    owner  => 'notarisdossier',
+    group  => 'notarisdossier',
+    mode   => '0600',
   }
 
   file { '/home/notarisdossier/.ssh/authorized_keys':
@@ -24,7 +24,8 @@ class profile_apache::config {
     require => File['/home/notarisdossier/.ssh'],
   }
 
-  create_resources('profile_apache::notarisdossier_user_keys', hiera("ssh_keys"))
+  $ssh_keys = hiera('ssh_keys', {} )
+  create_resources('profile_apache::notarisdossier_user_keys', $ssh_keys)
 
   apache::vhost { "${::profile_apache::vhost} non-ssl":
     servername => $::profile_apache::vhost,
@@ -86,7 +87,7 @@ class profile_apache::config {
     }
   }
   else {
-    file { $profile_apache::nfs_mountpoint:
+    file { '/mnt/nfs':
       ensure => directory,
     }
   }
