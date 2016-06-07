@@ -6,7 +6,7 @@
 class profile_apache::params {
   $vhost = $::fqdn
   $docroot = '/home/notarisdossier/application/current/frontends/office/public/'
-  $php_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap','php5-xsl','php5-xdebug','php5-mysql','libapache2-mod-php5', 'fop']
+  $php_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap','php5-xsl','dnsutils','php5-mysql','libapache2-mod-php5', 'fop']
   $monitor_address = $::monitor_address
   $nfs_address = $::nfs_address
   $nfs_mountpoint = '/mnt/templates'
