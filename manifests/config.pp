@@ -33,6 +33,14 @@ class profile_apache::config {
     require => File['/home/notarisdossier/.ssh'],
   }
 
+  file { '/home/notarisdossier/sessions':
+    ensure  => directory,
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
+    mode    => '0777',
+    require => User['notarisdossier'],
+  }
+
   $ssh_keys = hiera('ssh_keys', {} )
   create_resources('profile_apache::notarisdossier_user_keys', $ssh_keys)
 
