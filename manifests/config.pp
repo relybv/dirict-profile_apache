@@ -4,10 +4,18 @@
 #
 class profile_apache::config {
 
+  # create group
+  group { 'notarisdossier':
+    ensure => present,
+    gid    => 2000,
+  }
+
   # create user
   user { 'notarisdossier':
     ensure => present,
     shell  => '/bin/bash',
+    uid    => 2000,
+    gid    => 'notarisdossier',
   }
 
   file { '/home/notarisdossier/.ssh':
