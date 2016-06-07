@@ -9,6 +9,7 @@
 #
 class profile_apache
 (
+  $zendversion = $::profile_apache::params::zendversion,
   $packages = $::profile_apache::params::packages,
   $vhost = $::profile_apache::params::vhost,
   $docroot = $::profile_apache::params::docroot,

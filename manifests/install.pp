@@ -3,13 +3,35 @@
 # This class is called from profile_apache for install.
 #
 class profile_apache::install {
-
+  $zendversion = $::profile_apache::zendversion
+  $zendurl = "https://packages.zendframework.com/releases/ZendFramework-${zendversion}/ZendFramework-${zendversion}.tar.gz"
+  $destination = "/tmp/ZendFramework-${zendversion}.tar.gz"
   include nfs::client
 
   # install packages
   ensure_packages( $::profile_apache::packages )
 
-  # create root and logpath
+  # install zend framework
+  exec { "wget-${zendurl}":
+    command => "wget --no-check-certificate ${zendurl} -O ${destination}",
+    path    => '/usr/bin',
+    creates => "${destination}",
+    notify  => Exec[ 'tar-zf' ],
+  }
+
+  exec { 'tar-zf':
+    command => "/bin/tar -xzf ${destination}",
+    cwd     => '/tmp',
+    refreshonly => true,
+    notify  => Exec[ 'mv-zf' ],
+  }
+
+  exec { 'mv-zf':
+    command => "/bin/mv /tmp/ZendFramework-${zendversion}/library/Zend /usr/share/php/",
+    refreshonly => true,
+  }
+  
+  # create docroot and logpath
   $logpath = dirname( "${::profile_apache::logroot}${::profile_apache::error_log_file}" )
   $rootpath = dirname( $::profile_apache::docroot )
 
