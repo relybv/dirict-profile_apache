@@ -103,21 +103,12 @@ class profile_apache::config {
       atboot  => true,
     }
   }
-  else {
-    file { '/mnt/nfs':
-      ensure => directory,
-    }
-  }
 
-  file { '/mnt/nfs/config':
-    ensure => directory,
-  }
 
   file { '/mnt/nfs/config/local.php':
     ensure  => present,
     content => template('profile_apache/local.php.erb'),
     mode    => '0644',
-    require => File['/mnt/nfs/config'],
   }
 
 }
