@@ -102,11 +102,6 @@ class profile_apache::config {
     $nfs_address = $profile_apache::nfs_address
   }
 
-#  exec { '/bin/mkdir config office-templates errors logs;/bin/chown notarisdossier:notarisdossier config office-templates errors logs':
-#    cwd     => '/home/notarisdossier',
-#    creates => '/home/notarisdossier/logs',
-#  }
-
   nfs::client::mount { '/home/notarisdossier/config':
     server  => $nfs_address,
     share   => '/mnt/nfs/config',
