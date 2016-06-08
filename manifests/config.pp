@@ -106,6 +106,8 @@ class profile_apache::config {
     server  => $nfs_address,
     share   => '/mnt/nfs/config',
     mount   => '/home/notarisdossier/config',
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
     options => 'hard',
     atboot  => true,
   }
@@ -114,6 +116,8 @@ class profile_apache::config {
     server  => $nfs_address,
     share   => '/mnt/nfs/office-templates',
     mount   => '/home/notarisdossier/office-templates',
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
     options => 'hard',
     atboot  => true,
   }
@@ -122,6 +126,9 @@ class profile_apache::config {
     server  => $nfs_address,
     share   => '/mnt/nfs/errors',
     mount   => '/home/notarisdossier/errors',
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
+    perm    => '0777',
     options => 'hard',
     atboot  => true,
   }
@@ -130,6 +137,9 @@ class profile_apache::config {
     server  => $nfs_address,
     share   => '/mnt/nfs/logs',
     mount   => '/home/notarisdossier/logs',
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
+    perm    => '0777',
     options => 'hard',
     atboot  => true,
   }
