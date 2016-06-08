@@ -113,7 +113,6 @@ class profile_apache::config {
     mount   => '/home/notarisdossier/config',
     owner   => 'notarisdossier',
     group   => 'notarisdossier',
-    options => 'hard',
     atboot  => true,
   }
 
@@ -123,7 +122,6 @@ class profile_apache::config {
     mount   => '/home/notarisdossier/office-templates',
     owner   => 'notarisdossier',
     group   => 'notarisdossier',
-    options => 'hard',
     atboot  => true,
   }
 
@@ -133,8 +131,7 @@ class profile_apache::config {
     mount   => '/home/notarisdossier/errors',
     owner   => 'notarisdossier',
     group   => 'notarisdossier',
-    perm    => '0777',
-    options => 'hard',
+    mode    => '0777',
     atboot  => true,
   }
 
@@ -144,8 +141,7 @@ class profile_apache::config {
     mount   => '/home/notarisdossier/logs',
     owner   => 'notarisdossier',
     group   => 'notarisdossier',
-    perm    => '0777',
-    options => 'hard',
+    mode    => '0777',
     atboot  => true,
   }
 
