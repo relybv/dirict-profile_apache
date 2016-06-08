@@ -15,19 +15,19 @@ class profile_apache::install {
   exec { "wget-${zendurl}":
     command => "wget --no-check-certificate ${zendurl} -O ${destination}",
     path    => '/usr/bin',
-    creates => "${destination}",
+    creates => $destination,
     notify  => Exec[ 'tar-zf' ],
   }
 
   exec { 'tar-zf':
-    command => "/bin/tar -xzf ${destination}",
-    cwd     => '/tmp',
+    command     => "/bin/tar -xzf ${destination}",
+    cwd         => '/tmp',
     refreshonly => true,
-    notify  => Exec[ 'mv-zf' ],
+    notify      => Exec[ 'mv-zf' ],
   }
 
   exec { 'mv-zf':
-    command => "/bin/mv /tmp/ZendFramework-${zendversion}/library/Zend /usr/share/php/",
+    command     => "/bin/mv /tmp/ZendFramework-${zendversion}/library/Zend /usr/share/php/",
     refreshonly => true,
   }
   
