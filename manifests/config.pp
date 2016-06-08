@@ -110,6 +110,29 @@ class profile_apache::config {
     atboot  => true,
   }
 
+  nfs::client::mount { '/home/notarisdossier/office-templates':
+    server  => $nfs_address,
+    share   => '/mnt/nfs/office-templates',
+    mount   => '/home/notarisdossier/office-templates',
+    options => 'hard',
+    atboot  => true,
+  }
+
+  nfs::client::mount { '/home/notarisdossier/errors':
+    server  => $nfs_address,
+    share   => '/mnt/nfs/errors',
+    mount   => '/home/notarisdossier/errors',
+    options => 'hard',
+    atboot  => true,
+  }
+
+  nfs::client::mount { '/home/notarisdossier/logs':
+    server  => $nfs_address,
+    share   => '/mnt/nfs/logs',
+    mount   => '/home/notarisdossier/logs',
+    options => 'hard',
+    atboot  => true,
+  }
 
   file { '/mnt/nfs/config/local.php':
     ensure  => present,
