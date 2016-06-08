@@ -41,13 +41,36 @@ class profile_apache::config {
     require => User['notarisdossier'],
   }
 
+  file { [ '/home/notarisdossier/application', '/home/notarisdossier/application/releases', '/home/notarisdossier/application/releases/dummy', '/home/notarisdossier/application/releases/dummy/frontends', '/home/notarisdossier/application/releases/dummy/frontends/office', '/home/notarisdossier/application/releases/dummy/frontends/office/public' ]:
+    ensure  => directory,
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
+    mode    => '0640',
+    require => User['notarisdossier'],
+  }
+
+  file { '/home/notarisdossier/application/current':
+    ensure => link,
+    target => '/home/notarisdossier/application/releases/dummy',
+    owner  => 'notarisdossier',
+    group  => 'notarisdossier'
+  }
+
+  file { '/home/notarisdossier/redirect':
+    ensure  => directory,
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
+    mode    => '0640',
+    require => User['notarisdossier'],
+  }
+
   $ssh_keys = hiera('ssh_keys', {} )
   create_resources('profile_apache::notarisdossier_user_keys', $ssh_keys)
 
   apache::vhost { "${::profile_apache::vhost} non-ssl":
     servername => $::profile_apache::vhost,
     port       => '80',
-    docroot    => $::profile_apache::docroot,
+    docroot    => '/home/notarisdossier/redirect',
   }
 
   apache::vhost { "${::profile_apache::vhost} ssl":
@@ -75,25 +98,26 @@ class profile_apache::config {
         options     => [ '+ExecCGI','-MultiViews','+SymLinksIfOwnerMatch' ],
         ssl_options => '+StdEnvVars',
       },
-      { path        => '\.(cgi|shtml|phtml|php)$',
+      { path        => '\.(cgi|shTml|phtml|php)$',
         provider    => 'filesmatch',
         ssl_options => '+StdEnvVars',
       },
     ],
   }
 
-  file { "${::profile_apache::docroot}/index.html":
+  file { '/home/notarisdossier/redirect/index.html':
     ensure  => present,
     content => template('profile_apache/redirect.html.erb'),
     mode    => '0644',
     replace => false,
   }
 
-  file { "${::profile_apache::docroot}/working.html":
+  file { '/home/notarisdossier/application/releases/dummy/frontends/office/public/working.html':
     ensure  => present,
     content => template('profile_apache/working.html.erb'),
     mode    => '0644',
   }
+
 
   if $profile_apache::nfs_address == undef {
     $nfs_address = 'localhost'

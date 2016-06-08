@@ -31,18 +31,12 @@ class profile_apache::install {
     refreshonly => true,
   }
   
-  # create docroot and logpath
+  # create logpath
   $logpath = dirname( "${::profile_apache::logroot}${::profile_apache::error_log_file}" )
-  $rootpath = dirname( $::profile_apache::docroot )
 
   exec { $logpath:
     command => "/bin/mkdir -p ${logpath}",
     creates => $logpath,
-  }
-
-  exec { $rootpath:
-    command => "/bin/mkdir -p ${rootpath}",
-    creates => $rootpath,
   }
 
   # replace empty certs with undef
