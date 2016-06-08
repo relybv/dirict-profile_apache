@@ -15,7 +15,6 @@ class profile_apache
   $docroot = $::profile_apache::params::docroot,
   $monitor_address = $::profile_apache::params::monitor_address,
   $nfs_address = $::profile_apache::params::nfs_address,
-  $nfs_mountpoint =  $::profile_apache::params::nfs_mountpoint,
   $db_address = $::profile_apache::params::db_address,
   $win_address = $::profile_apache::params::win_address,
   $serveradmin = $::profile_apache::params::serveradmin,

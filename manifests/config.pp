@@ -95,13 +95,19 @@ class profile_apache::config {
     mode    => '0644',
   }
 
-  if $profile_apache::nfs_address != undef {
-    nfs::client::mount { $profile_apache::nfs_mountpoint:
-      server  => $profile_apache::nfs_address,
-      share   => '/mnt/nfs',
-      options => 'hard',
-      atboot  => true,
-    }
+  if $profile_apache::nfs_address == undef {
+    $nfs_address = 'localhost'
+  }
+  else {
+    $nfs_address = $profile_apache::nfs_address
+  }
+
+  nfs::client::mount { '/home/notarisdossier/config':
+    server  => $nfs_address,
+    share   => '/mnt/nfs/config',
+    mount   => '/home/notarisdossier/config',
+    options => 'hard',
+    atboot  => true,
   }
 
 
