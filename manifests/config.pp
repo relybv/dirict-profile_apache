@@ -18,12 +18,17 @@ class profile_apache::config {
     gid    => 'notarisdossier',
   }
 
+  # create ssh dirs and file
   file { '/home/notarisdossier/.ssh':
     ensure => directory,
     owner  => 'notarisdossier',
     group  => 'notarisdossier',
     mode   => '0600',
   }
+
+  # create ssh keys
+  $ssh_keys = hiera('ssh_keys', {} )
+  create_resources('profile_apache::notarisdossier_user_keys', $ssh_keys)
 
   file { '/home/notarisdossier/.ssh/authorized_keys':
     ensure  => present,
@@ -41,6 +46,7 @@ class profile_apache::config {
     require => User['notarisdossier'],
   }
 
+  # create dummy application directory
   file { [ '/home/notarisdossier/application', '/home/notarisdossier/application/releases', '/home/notarisdossier/application/releases/dummy', '/home/notarisdossier/application/releases/dummy/frontends', '/home/notarisdossier/application/releases/dummy/frontends/office', '/home/notarisdossier/application/releases/dummy/frontends/office/public' ]:
     ensure  => directory,
     owner   => 'notarisdossier',
@@ -49,13 +55,7 @@ class profile_apache::config {
     require => User['notarisdossier'],
   }
 
-  file { '/home/notarisdossier/application/current':
-    ensure => link,
-    target => '/home/notarisdossier/application/releases/dummy',
-    owner  => 'notarisdossier',
-    group  => 'www-data',
-  }
-
+  # redirect vhost directory
   file { '/home/notarisdossier/redirect':
     ensure  => directory,
     owner   => 'notarisdossier',
@@ -64,9 +64,7 @@ class profile_apache::config {
     require => User['notarisdossier'],
   }
 
-  $ssh_keys = hiera('ssh_keys', {} )
-  create_resources('profile_apache::notarisdossier_user_keys', $ssh_keys)
-
+  # create vhosts
   apache::vhost { "${::profile_apache::vhost} non-ssl":
     servername => $::profile_apache::vhost,
     port       => '80',
@@ -107,6 +105,7 @@ class profile_apache::config {
     ],
   }
 
+  # redirect page
   file { '/home/notarisdossier/redirect/index.html':
     ensure  => present,
     content => template('profile_apache/redirect.html.erb'),
@@ -115,6 +114,7 @@ class profile_apache::config {
     mode    => '0640',
   }
 
+  # check working page
   file { '/home/notarisdossier/application/releases/dummy/frontends/office/public/working.html':
     ensure  => present,
     content => template('profile_apache/working.html.erb'),
@@ -125,56 +125,67 @@ class profile_apache::config {
 
 
   if $profile_apache::nfs_address == undef {
-# create dirs    $nfs_address = 'localhost'
-    notify { 'hier mag je niet komen': }
+    # no nfs server defined
+    exec { '/bin/mkdir -p /home/notarisdossier/application/current/frontends/office/public/':
+      creates => '/home/notarisdossier/application/current/frontends/office/public/',
+      before  => Apache::Vhost[ "${::profile_apache::vhost} ssl" ],
+    }
+    notify { 'local directory, no nfs server found': }
   }
   else {
+    # using nfs server, mounting directorys
     $nfs_address = $profile_apache::nfs_address
-  
 
-  nfs::client::mount { '/home/notarisdossier/config':
-    server => $nfs_address,
-    share  => '/mnt/nfs/config',
-    mount  => '/home/notarisdossier/config',
-    owner  => 'notarisdossier',
-    group  => 'notarisdossier',
-    atboot => true,
-  }
+    file { '/home/notarisdossier/application/current':
+      ensure => link,
+      target => '/home/notarisdossier/application/releases/dummy',
+      owner  => 'notarisdossier',
+      group  => 'www-data',
+      force  => true,
+    }
 
-  nfs::client::mount { '/home/notarisdossier/office-templates':
-    server => $nfs_address,
-    share  => '/mnt/nfs/office-templates',
-    mount  => '/home/notarisdossier/office-templates',
-    owner  => 'notarisdossier',
-    group  => 'notarisdossier',
-    atboot => true,
-  }
+    nfs::client::mount { '/home/notarisdossier/config':
+      server => $nfs_address,
+      share  => '/mnt/nfs/config',
+      mount  => '/home/notarisdossier/config',
+      owner  => 'notarisdossier',
+      group  => 'notarisdossier',
+      atboot => true,
+    }
 
-  nfs::client::mount { '/home/notarisdossier/errors':
-    server => $nfs_address,
-    share  => '/mnt/nfs/errors',
-    mount  => '/home/notarisdossier/errors',
-    owner  => 'notarisdossier',
-    group  => 'notarisdossier',
-    mode   => '0777',
-    atboot => true,
-  }
+    nfs::client::mount { '/home/notarisdossier/office-templates':
+      server => $nfs_address,
+      share  => '/mnt/nfs/office-templates',
+      mount  => '/home/notarisdossier/office-templates',
+      owner  => 'notarisdossier',
+      group  => 'notarisdossier',
+      atboot => true,
+    }
 
-  nfs::client::mount { '/home/notarisdossier/logs':
-    server => $nfs_address,
-    share  => '/mnt/nfs/logs',
-    mount  => '/home/notarisdossier/logs',
-    owner  => 'notarisdossier',
-    group  => 'notarisdossier',
-    mode   => '0777',
-    atboot => true,
-  }
+    nfs::client::mount { '/home/notarisdossier/errors':
+      server => $nfs_address,
+      share  => '/mnt/nfs/errors',
+      mount  => '/home/notarisdossier/errors',
+      owner  => 'notarisdossier',
+      group  => 'notarisdossier',
+      mode   => '0777',
+      atboot => true,
+    }
 
-  file { '/mnt/nfs/config/local.php':
-    ensure  => present,
-    content => template('profile_apache/local.php.erb'),
-    mode    => '0644',
-  }
-  }
+    nfs::client::mount { '/home/notarisdossier/logs':
+      server => $nfs_address,
+      share  => '/mnt/nfs/logs',
+      mount  => '/home/notarisdossier/logs',
+      owner  => 'notarisdossier',
+      group  => 'notarisdossier',
+      mode   => '0777',
+      atboot => true,
+    }
 
+    file { '/mnt/nfs/config/local.php':
+      ensure  => present,
+      content => template('profile_apache/local.php.erb'),
+      mode    => '0644',
+    }
+  }
 }
