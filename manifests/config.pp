@@ -44,7 +44,7 @@ class profile_apache::config {
   file { [ '/home/notarisdossier/application', '/home/notarisdossier/application/releases', '/home/notarisdossier/application/releases/dummy', '/home/notarisdossier/application/releases/dummy/frontends', '/home/notarisdossier/application/releases/dummy/frontends/office', '/home/notarisdossier/application/releases/dummy/frontends/office/public' ]:
     ensure  => directory,
     owner   => 'notarisdossier',
-    group   => 'notarisdossier',
+    group   => 'www-data',
     mode    => '0640',
     require => User['notarisdossier'],
   }
@@ -53,14 +53,14 @@ class profile_apache::config {
     ensure => link,
     target => '/home/notarisdossier/application/releases/dummy',
     owner  => 'notarisdossier',
-    group  => 'notarisdossier'
+    group  => 'www-data'
   }
 
   file { '/home/notarisdossier/redirect':
     ensure  => directory,
     owner   => 'notarisdossier',
-    group   => 'notarisdossier',
-    mode    => '0640',
+    group   => 'www-data',
+    mode    => '0750',
     require => User['notarisdossier'],
   }
 
@@ -83,7 +83,7 @@ class profile_apache::config {
     port                 => '443',
     docroot              => $::profile_apache::docroot,
     docroot_owner        => 'notarisdossier',
-    docroot_group        => 'notarisdossier',
+    docroot_group        => 'www-data',
     logroot              => $::profile_apache::logroot,
     ssl                  => true,
     ssl_honorcipherorder => 'On',
@@ -110,14 +110,17 @@ class profile_apache::config {
   file { '/home/notarisdossier/redirect/index.html':
     ensure  => present,
     content => template('profile_apache/redirect.html.erb'),
-    mode    => '0644',
-    replace => false,
+    owner   => 'notarisdossier',
+    group   => 'www-data',
+    mode    => '0640',
   }
 
   file { '/home/notarisdossier/application/releases/dummy/frontends/office/public/working.html':
     ensure  => present,
     content => template('profile_apache/working.html.erb'),
-    mode    => '0644',
+    owner   => 'notarisdossier',
+    group   => 'www-data',
+    mode    => '0640',
   }
 
 
