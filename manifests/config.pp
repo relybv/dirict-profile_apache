@@ -53,7 +53,7 @@ class profile_apache::config {
     ensure => link,
     target => '/home/notarisdossier/application/releases/dummy',
     owner  => 'notarisdossier',
-    group  => 'www-data'
+    group  => 'www-data',
   }
 
   file { '/home/notarisdossier/redirect':
@@ -125,54 +125,56 @@ class profile_apache::config {
 
 
   if $profile_apache::nfs_address == undef {
-    $nfs_address = 'localhost'
+# create dirs    $nfs_address = 'localhost'
+    notify { 'hier mag je niet komen': }
   }
   else {
     $nfs_address = $profile_apache::nfs_address
-  }
+  
 
   nfs::client::mount { '/home/notarisdossier/config':
-    server  => $nfs_address,
-    share   => '/mnt/nfs/config',
-    mount   => '/home/notarisdossier/config',
-    owner   => 'notarisdossier',
-    group   => 'notarisdossier',
-    atboot  => true,
+    server => $nfs_address,
+    share  => '/mnt/nfs/config',
+    mount  => '/home/notarisdossier/config',
+    owner  => 'notarisdossier',
+    group  => 'notarisdossier',
+    atboot => true,
   }
 
   nfs::client::mount { '/home/notarisdossier/office-templates':
-    server  => $nfs_address,
-    share   => '/mnt/nfs/office-templates',
-    mount   => '/home/notarisdossier/office-templates',
-    owner   => 'notarisdossier',
-    group   => 'notarisdossier',
-    atboot  => true,
+    server => $nfs_address,
+    share  => '/mnt/nfs/office-templates',
+    mount  => '/home/notarisdossier/office-templates',
+    owner  => 'notarisdossier',
+    group  => 'notarisdossier',
+    atboot => true,
   }
 
   nfs::client::mount { '/home/notarisdossier/errors':
-    server  => $nfs_address,
-    share   => '/mnt/nfs/errors',
-    mount   => '/home/notarisdossier/errors',
-    owner   => 'notarisdossier',
-    group   => 'notarisdossier',
-    mode    => '0777',
-    atboot  => true,
+    server => $nfs_address,
+    share  => '/mnt/nfs/errors',
+    mount  => '/home/notarisdossier/errors',
+    owner  => 'notarisdossier',
+    group  => 'notarisdossier',
+    mode   => '0777',
+    atboot => true,
   }
 
   nfs::client::mount { '/home/notarisdossier/logs':
-    server  => $nfs_address,
-    share   => '/mnt/nfs/logs',
-    mount   => '/home/notarisdossier/logs',
-    owner   => 'notarisdossier',
-    group   => 'notarisdossier',
-    mode    => '0777',
-    atboot  => true,
+    server => $nfs_address,
+    share  => '/mnt/nfs/logs',
+    mount  => '/home/notarisdossier/logs',
+    owner  => 'notarisdossier',
+    group  => 'notarisdossier',
+    mode   => '0777',
+    atboot => true,
   }
 
   file { '/mnt/nfs/config/local.php':
     ensure  => present,
     content => template('profile_apache/local.php.erb'),
     mode    => '0644',
+  }
   }
 
 }
