@@ -168,7 +168,7 @@ class profile_apache::config {
       mount  => '/home/notarisdossier/errors',
       owner  => 'notarisdossier',
       group  => 'notarisdossier',
-      mode   => '0777',
+      perm   => '0777',
       atboot => true,
     }
 
@@ -178,7 +178,7 @@ class profile_apache::config {
       mount  => '/home/notarisdossier/logs',
       owner  => 'notarisdossier',
       group  => 'notarisdossier',
-      mode   => '0777',
+      perm   => '0777',
       atboot => true,
     }
 
