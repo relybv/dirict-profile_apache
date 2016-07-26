@@ -80,6 +80,7 @@ class profile_apache::install {
     default_vhost          => false,
     mpm_module             => 'prefork',
     root_directory_options => $::profile_apache::root_directory_options,
+    log_level              => $::profile_apache::log_level,
     require                => Exec[ $logpath ],
     default_mods           => [
       'php',
