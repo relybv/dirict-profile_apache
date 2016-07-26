@@ -106,6 +106,21 @@ class profile_apache::config {
     ],
   }
 
+  # if syslog client read apache logfiles
+  if defined('rsyslog::client') {
+    rsyslog::imfile { 'apache-access':
+      file_name     => $::profile_apache::access_log_file,
+      file_tag      => 'apache-access',
+      file_facility => 'info',
+    }
+    rsyslog::imfile { 'apache-error':
+      file_name     => $::profile_apache::error_log_file,
+      file_tag      => 'apache-error',
+      file_facility => 'info',
+    }
+  }
+
+
   # redirect page
   file { '/home/notarisdossier/redirect/index.html':
     ensure  => present,
