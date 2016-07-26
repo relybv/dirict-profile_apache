@@ -69,6 +69,7 @@ class profile_apache::config {
     servername => $::profile_apache::vhost,
     port       => '80',
     docroot    => '/home/notarisdossier/redirect',
+    log_level  => $::profile_apache::log_level,
   }
 
   apache::vhost { "${::profile_apache::vhost} ssl":
