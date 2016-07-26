@@ -109,7 +109,6 @@ class profile_apache::config {
 
   wget::fetch { 'http://www.dirict.nl/downloads/Comodo_PositiveSSL_bundle.crt':
     destination => '/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt',
-    cache_dir   => '/var/cache/wget',
   }
 
   rsyslog::imfile { 'apache-access':
