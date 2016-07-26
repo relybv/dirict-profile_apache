@@ -5,6 +5,7 @@ fixtures:
 # profile module layout, default include ntp module
     ntp: "https://github.com/puppetlabs/puppetlabs-ntp.git"
     apache: "https://github.com/puppetlabs/puppetlabs-apache.git"
+    rsyslog: "https://github.com/saz/puppet-rsyslog.git"
     concat:
       repo: "https://github.com/puppetlabs/puppetlabs-concat.git"
       branch: "1.2.x"
