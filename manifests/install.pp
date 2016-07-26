@@ -7,7 +7,7 @@ class profile_apache::install {
   $zendurl = "https://packages.zendframework.com/releases/ZendFramework-${zendversion}/ZendFramework-${zendversion}.tar.gz"
   $destination = "/tmp/ZendFramework-${zendversion}.tar.gz"
   include nfs::client
-
+  include wget
   # install packages
   ensure_packages( $::profile_apache::packages )
 
