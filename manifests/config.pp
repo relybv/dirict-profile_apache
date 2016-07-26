@@ -90,6 +90,7 @@ class profile_apache::config {
     ssl_protocol         => 'All -SSLv2',
     ssl_cert             => $::profile_apache::install::ssl_cert_path,
     ssl_key              => $::profile_apache::install::ssl_key_path,
+    ssl_chain            => '/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt',
     directories          => [
       { path           => $profile_apache::docroot,
         allow_override => [ 'ALL' ],
@@ -104,6 +105,11 @@ class profile_apache::config {
         ssl_options => '+StdEnvVars',
       },
     ],
+  }
+
+  wget::fetch { 'http://www.dirict.nl/downloads/Comodo_PositiveSSL_bundle.crt':
+    destination => '/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt',
+    cache_dir   => '/var/cache/wget',
   }
 
   rsyslog::imfile { 'apache-access':

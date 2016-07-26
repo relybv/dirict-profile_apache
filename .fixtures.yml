@@ -10,5 +10,6 @@ fixtures:
       repo: "https://github.com/puppetlabs/puppetlabs-concat.git"
       branch: "1.2.x"
     nfs: "https://github.com/echocat/puppet-nfs.git"
+    wget: "https://github.com/maestrodev/puppet-wget.git"
   symlinks:
     profile_apache: "#{source_dir}"
