@@ -87,7 +87,7 @@ class profile_apache::config {
     ssl                  => true,
     ssl_honorcipherorder => 'On',
     ssl_cipher           => 'ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:HIGH:!MD5:!aNULL:!EDH',
-    ssl_protocol         => 'All -SSLv2',
+    ssl_protocol         => 'All -SSLv2 -SSLv3',
     ssl_cert             => $::profile_apache::install::ssl_cert_path,
     ssl_key              => $::profile_apache::install::ssl_key_path,
     ssl_chain            => '/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt',
