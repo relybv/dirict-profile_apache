@@ -75,6 +75,7 @@ class profile_apache::config {
   apache::vhost { "${::profile_apache::vhost} ssl":
     servername           => $::profile_apache::vhost,
     serveradmin          => $::profile_apache::serveradmin,
+    serveraliases        => [ "rely01-${::hostname}.notarisdossier.nl" ], # rely01-app1.notarisdossier.nl
     scriptalias          => $::profile_apache::scriptalias,
     log_level            => $::profile_apache::log_level,
     error_log_file       => $::profile_apache::error_log_file,
