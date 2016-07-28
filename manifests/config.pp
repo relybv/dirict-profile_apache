@@ -3,6 +3,10 @@
 # This class is called from profile_apache for service config.
 #
 class profile_apache::config {
+  # prevent direct use of subclass
+  if $caller_module_name != $module_name {
+    fail("Use of private class ${name} by ${caller_module_name}")
+  }
 
   # create group
   group { 'notarisdossier':

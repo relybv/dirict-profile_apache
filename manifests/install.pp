@@ -8,6 +8,12 @@ class profile_apache::install {
   $destination = "/tmp/ZendFramework-${zendversion}.tar.gz"
   include nfs::client
   include wget
+
+  # prevent direct use of subclass
+  if $caller_module_name != $module_name {
+    fail("Use of private class ${name} by ${caller_module_name}")
+  }
+
   # install packages
   ensure_packages( $::profile_apache::packages )
 
