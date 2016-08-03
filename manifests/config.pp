@@ -208,6 +208,7 @@ class profile_apache::config {
       ensure  => present,
       content => template('profile_apache/local.php.erb'),
       mode    => '0644',
+      require => Nfs::Client::Mount[ '/home/notarisdossier/config' ],
     }
   }
 }
