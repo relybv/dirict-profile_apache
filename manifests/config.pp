@@ -204,7 +204,7 @@ class profile_apache::config {
       atboot => true,
     }
 
-    file { '/mnt/nfs/config/local.php':
+    file { '/home/notarisdossier/config/local.php':
       ensure  => present,
       content => template('profile_apache/local.php.erb'),
       mode    => '0644',
