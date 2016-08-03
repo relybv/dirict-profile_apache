@@ -10,7 +10,7 @@ class profile_apache::params {
   $php_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap','php5-xsl','dnsutils','php5-mysql','libapache2-mod-php5', 'fop', 'imagemagick', 'dnsutils', 'curl']
   $monitor_address = $::monitor_address
   $nfs_address = $::nfs_address
-  $db_address = 'localhost'
+  $db_address = $::db_address
   $serveradmin = 'webmaster@notarisdossier.nl'
   $root_directory_options = [ 'FollowSymLinks']
   $scriptalias = '/cgi-bin/ /usr/lib/cgi-bin/'
