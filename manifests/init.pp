@@ -38,6 +38,26 @@ class profile_apache
 ) inherits ::profile_apache::params {
 
   # validate parameters here
+  validate_string($zendversion)
+  validate_array($packages)
+  validate_string($vhost)
+  validate_absolute_path($docroot)
+  validate_string($serveradmin)
+  validate_array($root_directory_options)
+  validate_string($scriptalias)
+  validate_string($log_level)
+  validate_absolute_path($logroot)
+  validate_absolute_path($access_log_file)
+  validate_absolute_path($error_log_file)
+  validate_string($ext_lb_fqdn)
+  validate_string($db_password)
+  validate_string($dirict_username)
+  validate_string($dirict_password)
+  validate_string($azure_account)
+  validate_string($azure_access_key)
+  validate_string($webservices_dirict_username)
+  validate_string($webservices_dirict_password)
+  validate_string($webdav_dirict_templates_password)
 
   notify {"addr from init: monitor ${monitor_address}, nfs ${nfs_address}, db ${db_address}, win ${win_address}": }
 
