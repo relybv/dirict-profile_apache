@@ -36,7 +36,7 @@ class profile_apache::install {
     command     => "/bin/mv /tmp/ZendFramework-${zendversion}/library/Zend /usr/share/php/",
     refreshonly => true,
   }
- 
+
   # create logpath
   $logpath = dirname( "${::profile_apache::logroot}${::profile_apache::error_log_file}" )
 

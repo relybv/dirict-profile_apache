@@ -51,7 +51,10 @@ class profile_apache::config {
   }
 
   # create dummy application directory
-  file { [ '/home/notarisdossier/application', '/home/notarisdossier/application/releases', '/home/notarisdossier/application/releases/dummy', '/home/notarisdossier/application/releases/dummy/frontends', '/home/notarisdossier/application/releases/dummy/frontends/office', '/home/notarisdossier/application/releases/dummy/frontends/office/public' ]:
+  file { [ '/home/notarisdossier/application', '/home/notarisdossier/application/releases',
+  '/home/notarisdossier/application/releases/dummy', '/home/notarisdossier/application/releases/dummy/frontends',
+  '/home/notarisdossier/application/releases/dummy/frontends/office',
+  '/home/notarisdossier/application/releases/dummy/frontends/office/public' ]:
     ensure  => directory,
     owner   => 'notarisdossier',
     group   => 'www-data',
