@@ -36,7 +36,7 @@ class profile_apache::install {
     command     => "/bin/mv /tmp/ZendFramework-${zendversion}/library/Zend /usr/share/php/",
     refreshonly => true,
   }
-  
+ 
   # create logpath
   $logpath = dirname( "${::profile_apache::logroot}${::profile_apache::error_log_file}" )
 
@@ -59,8 +59,8 @@ class profile_apache::install {
       creates => '/etc/ssl/certs',
     }
     file { '/etc/ssl/certs/ssl-cert-default.pem':
-      ensure  => link,
-      target  =>  $ssl_cert,
+      ensure => link,
+      target => $ssl_cert,
     }
     $ssl_cert_path = '/etc/ssl/certs/ssl-cert-default.pem'
   }
@@ -78,8 +78,8 @@ class profile_apache::install {
       creates => '/etc/ssl/private',
     }
     file { '/etc/ssl/private/ssl-cert-default.key':
-      ensure  => link,
-      target  =>  $ssl_key,
+      ensure => link,
+      target => $ssl_key,
     }
     $ssl_key_path = '/etc/ssl/private/ssl-cert-default.key'
   }
