@@ -22,6 +22,13 @@ class profile_apache::config {
     gid    => 'notarisdossier',
   }
 
+  # set owner
+  file { '/home/notarisdossier':
+    ensure => directory,
+    owner  => 'notarisdossier',
+    group  => 'notarisdossier',
+  }
+
   # create ssh dirs and file
   file { '/home/notarisdossier/.ssh':
     ensure => directory,
