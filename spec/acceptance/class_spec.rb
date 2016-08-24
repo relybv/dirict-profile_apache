@@ -34,11 +34,11 @@ describe 'profile_apache class' do
    end
 
    describe port(80) do
-     it { should be_listening.with('tcp') }
+     it { should be_listening }
    end
 
    describe port(443) do
-     it { should be_listening.with('tcp') }
+     it { should be_listening }
    end
 
   end
