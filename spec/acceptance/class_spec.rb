@@ -33,5 +33,13 @@ describe 'profile_apache class' do
      it { is_expected.to be_running }
    end
 
+   describe port(80) do
+     it { should be_listening.with('tcp') }
+   end
+
+   describe port(443) do
+     it { should be_listening.with('tcp') }
+   end
+
   end
 end
