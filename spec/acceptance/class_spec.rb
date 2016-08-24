@@ -22,24 +22,27 @@ describe 'profile_apache class' do
       end
     end
 
-
+  describe host('8.8.8.8') do
+    it { should be_reachable }
+    it { should be_reachable.with( :port => 53, :proto => 'udp' ) }
+  end
   
-   describe package('apache2') do
-     it { is_expected.to be_installed }
-   end
+  describe package('apache2') do
+    it { is_expected.to be_installed }
+  end
 
-   describe service('apache2') do
-     it { is_expected.to be_enabled }
-     it { is_expected.to be_running }
-   end
+  describe service('apache2') do
+    it { is_expected.to be_enabled }
+    it { is_expected.to be_running }
+  end
 
-   describe port(80) do
-     it { should be_listening }
-   end
+  describe port(80) do
+    it { should be_listening }
+  end
 
-   describe port(443) do
-     it { should be_listening }
-   end
+  describe port(443) do
+    it { should be_listening }
+  end
 
   end
 end
