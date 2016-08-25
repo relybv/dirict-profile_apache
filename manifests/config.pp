@@ -169,11 +169,12 @@ class profile_apache::config {
     $nfs_address = $profile_apache::nfs_address
 
     file { '/home/notarisdossier/application/current':
-      ensure => link,
-      target => '/home/notarisdossier/application/releases/dummy',
-      owner  => 'notarisdossier',
-      group  => 'www-data',
-      force  => true,
+      ensure  => link,
+      target  => '/home/notarisdossier/application/releases/dummy',
+      owner   => 'notarisdossier',
+      group   => 'www-data',
+      force   => true,
+      replace => false,
     }
 
     nfs::client::mount { '/home/notarisdossier/config':
