@@ -23,7 +23,7 @@ class profile_apache::params {
   $ssl_cert = undef
   $ssl_key = undef
   $ext_lb_fqdn = $::ext_lb_fqdn
-  $db_password = 'welkom01'
+  $db_password = hiera('db_password', 'welkom01')
   $dirict_username = 'dirict'
   $dirict_password = 'welkom01'
   $azure_account = ''

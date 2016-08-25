@@ -217,8 +217,8 @@ class profile_apache::config {
     file { '/home/notarisdossier/config/local.php':
       ensure  => present,
       content => template('profile_apache/local.php.erb'),
-      owner  => 'notarisdossier',
-      group  => 'notarisdossier',
+      owner   => 'notarisdossier',
+      group   => 'notarisdossier',
       mode    => '0644',
       require => Nfs::Client::Mount[ '/home/notarisdossier/config' ],
     }
