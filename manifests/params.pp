@@ -5,10 +5,11 @@
 #
 class profile_apache::params {
   $office_server_name = hiera('profile_apache::office_server_name', $::fqdn)
-#  $office_server_alias =
-#  $office_document_root =
-#  $office_error_log =
-#  $office_access_log =
+  $office_server_alias = hiera('profile_apache::office_server_name', "rely01-${::hostname}.notarisdossier.nl" ])
+  $office_document_root = hiera('profile_apache::office_document_root', '/home/notarisdossier/application/current/frontends/office/public/')
+  $office_error_log = hiera('profile_apache::office_error_log', '/vhostlog/pro.notarisdossier.nl.log')
+  $office_access_log = hiera('profile_apache::office_access_log', '/home/notarisdossier/vhostlog/pro.notarisdossier.nl.ssl_access.log')
+
 
   $zendversion = '1.10.8'
   $vhost = $::fqdn
