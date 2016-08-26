@@ -95,7 +95,7 @@ class profile_apache::install {
       'headers',
       'rewrite',
       'expires',
-      'myfixip',
+      'mod_proxy_protocol',
     ],
   }
 
