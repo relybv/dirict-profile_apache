@@ -105,7 +105,6 @@ class profile_apache::install {
 
   file { '/usr/lib/apache2/modules/mod_myfixip.so':
     source  => 'puppet:///modules/profile_apache/mod_myfixip.so',
-    require => Class[ 'apache' ],
   }
 
 }
