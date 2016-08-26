@@ -9,35 +9,41 @@
 #
 class profile_apache
 (
-  $office_server_name = $::profile_apache::params::office_server_name,
-  $office_document_root = $::profile_apache::params::office_document_root,
-  $office_error_log = $::profile_apache::params::office_error_log,
-  $office_access_log = $::profile_apache::params::office_access_log,
-
-  $client_server_name = $::profile_apache::params::client_server_name,
-  $client_document_root = $::profile_apache::params::client_document_root,
-  $client_error_log = $::profile_apache::params::client_error_log,
-  $client_access_log = $::profile_apache::params::client_access_log,
-
-
+  # software
   $zendversion = $::profile_apache::params::zendversion,
   $packages = $::profile_apache::params::packages,
-  $vhost = $::profile_apache::params::vhost,
-  $docroot = $::profile_apache::params::docroot,
+  # infra
   $monitor_address = $::profile_apache::params::monitor_address,
   $nfs_address = $::profile_apache::params::nfs_address,
   $db_address = $::profile_apache::params::db_address,
   $win_address = $::profile_apache::params::win_address,
+  $ext_lb_fqdn = $::profile_apache::params::ext_lb_fqdn,
+  # apache
   $serveradmin = $::profile_apache::params::serveradmin,
   $root_directory_options = $::profile_apache::params::root_directory_options,
   $scriptalias = $::profile_apache::params::scriptalias,
   $log_level = $::profile_apache::params::log_level,
   $logroot = $::profile_apache::params::logroot,
-  $access_log_file = $::profile_apache::params::access_log_file,
-  $error_log_file = $::profile_apache::params::error_log_file,
+  # certificates
   $ssl_cert = $::profile_apache::params::ssl_cert,
   $ssl_key =  $::profile_apache::params::ssl_key,
-  $ext_lb_fqdn = $::profile_apache::params::ext_lb_fqdn,
+  # vhost office
+  $office_server_name = $::profile_apache::params::office_server_name,
+  $office_document_root = $::profile_apache::params::office_document_root,
+  $office_error_log = $::profile_apache::params::office_error_log,
+  $office_access_log = $::profile_apache::params::office_access_log,
+  # vhosts client
+  $client_server_name = $::profile_apache::params::client_server_name,
+  $client_document_root = $::profile_apache::params::client_document_root,
+  $client_error_log = $::profile_apache::params::client_error_log,
+  $client_access_log = $::profile_apache::params::client_access_log,
+
+  # old vhost
+  $vhost = $::profile_apache::params::vhost,
+  $docroot = $::profile_apache::params::docroot,
+  $access_log_file = $::profile_apache::params::access_log_file,
+  $error_log_file = $::profile_apache::params::error_log_file,
+  # accounts
   $db_password = $::profile_apache::params::db_password,
   $dirict_username = $::profile_apache::params::dirict_username,
   $dirict_password = $::profile_apache::params::dirict_password,
