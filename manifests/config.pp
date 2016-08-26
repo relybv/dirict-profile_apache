@@ -108,6 +108,7 @@ class profile_apache::config {
     ssl_cert             => $::profile_apache::install::ssl_cert_path,
     ssl_key              => $::profile_apache::install::ssl_key_path,
     ssl_chain            => '/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt',
+    custom_fragment      => 'RewriteIPResetHeader on',
     directories          => [
       { path           => $profile_apache::office_document_root,
         allow_override => [ 'ALL' ],
