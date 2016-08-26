@@ -4,6 +4,12 @@
 # It sets variables according to platform.
 #
 class profile_apache::params {
+  $office_server_name = hiera('profile_apache::office_server_name', $::fqdn)
+#  $office_server_alias =
+#  $office_document_root =
+#  $office_error_log =
+#  $office_access_log =
+
   $zendversion = '1.10.8'
   $vhost = $::fqdn
   $docroot = '/home/notarisdossier/application/current/frontends/office/public/'
