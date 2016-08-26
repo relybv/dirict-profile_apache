@@ -7,8 +7,14 @@ class profile_apache::params {
   $office_server_name = hiera('profile_apache::office_server_name', $::fqdn)
   $office_server_alias = hiera('profile_apache::office_server_alias', "rely01-${::hostname}.notarisdossier.nl" )
   $office_document_root = hiera('profile_apache::office_document_root', '/home/notarisdossier/application/current/frontends/office/public/')
-  $office_error_log = hiera('profile_apache::office_error_log', '/vhostlog/pro.notarisdossier.nl.log')
-  $office_access_log = hiera('profile_apache::office_access_log', '/home/notarisdossier/vhostlog/pro.notarisdossier.nl.ssl_access.log')
+  $office_error_log = hiera('profile_apache::office_error_log', '/home/notarisdossier/vhostlog/office_error.log')
+  $office_access_log = hiera('profile_apache::office_access_log', '/home/notarisdossier/vhostlog/office_access.log')
+
+  $client_server_name = hiera('profile_apache::client_server_name', "wildcard.${::domain}")
+  $client_server_alias = hiera('profile_apache::client_server_alias', '*.notarisdossier.nl' )
+  $client_document_root = hiera('profile_apache::client_document_root', '/home/notarisdossier/application/current/frontends/client/public/')
+  $client_error_log = hiera('profile_apache::client_error_log', '/home/notarisdossier/vhostlog/client_error.log')
+  $client_access_log = hiera('profile_apache::client_access_log', '/home/notarisdossier/vhostlog/client_access.log')
 
 
   $zendversion = '1.10.8'
