@@ -9,6 +9,17 @@
 #
 class profile_apache
 (
+  $office_server_name = $::profile_apache::params::office_server_name,
+  $office_document_root = $::profile_apache::params::office_document_root,
+  $office_error_log = $::profile_apache::params::office_error_log,
+  $office_access_log = $::profile_apache::params::office_access_log,
+
+  $client_server_name = $::profile_apache::params::client_server_name,
+  $client_document_root = $::profile_apache::params::client_document_root,
+  $client_error_log = $::profile_apache::params::client_error_log,
+  $client_access_log = $::profile_apache::params::client_access_log,
+
+
   $zendversion = $::profile_apache::params::zendversion,
   $packages = $::profile_apache::params::packages,
   $vhost = $::profile_apache::params::vhost,
@@ -38,6 +49,11 @@ class profile_apache
 ) inherits ::profile_apache::params {
 
   # validate parameters here
+  validate_string($office_server_name)
+  validate_absolute_path($office_document_root)
+  validate_string($office_error_log)
+  validate_string($office_access_log)
+
   validate_string($zendversion)
   validate_array($packages)
   validate_string($vhost)
