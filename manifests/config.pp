@@ -100,7 +100,7 @@ class profile_apache::config {
     docroot              => $::profile_apache::client_document_root,
     docroot_owner        => 'notarisdossier',
     docroot_group        => 'www-data',
-    logroot              => '/',
+#    logroot              => '/',
     ssl                  => true,
     ssl_honorcipherorder => 'On',
     ssl_cipher           => 'ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:HIGH:!MD5:!aNULL:!EDH',
