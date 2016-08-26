@@ -79,6 +79,7 @@ class profile_apache::config {
   }
 
   # create vhosts
+  # redirect vhost
   apache::vhost { "${::profile_apache::vhost} non-ssl":
     servername => $::profile_apache::vhost,
     port       => '80',
@@ -86,6 +87,44 @@ class profile_apache::config {
     log_level  => $::profile_apache::log_level,
   }
 
+  # client vhost
+  apache::vhost { $::profile_apache::client_server_name:
+    servername           => $::profile_apache::client_server_name,
+    serveradmin          => $::profile_apache::serveradmin,
+    serveraliases        => $::profile_apache::client_server_alias,
+    scriptalias          => $::profile_apache::scriptalias,
+    log_level            => $::profile_apache::log_level,
+    error_log_file       => $::profile_apache::client_error_log,
+    access_log_file      => $::profile_apache::client_access_log,
+    port                 => '443',
+    docroot              => $::profile_apache::client_document_root,
+    docroot_owner        => 'notarisdossier',
+    docroot_group        => 'www-data',
+    logroot              => $::profile_apache::logroot,
+    ssl                  => true,
+    ssl_honorcipherorder => 'On',
+    ssl_cipher           => 'ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:HIGH:!MD5:!aNULL:!EDH',
+    ssl_protocol         => 'All -SSLv2 -SSLv3',
+    ssl_cert             => $::profile_apache::install::ssl_cert_path,
+    ssl_key              => $::profile_apache::install::ssl_key_path,
+    ssl_chain            => '/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt',
+    directories          => [
+      { path           => $profile_apache::client_document_root,
+        allow_override => [ 'ALL' ],
+        options        => [ 'Indexes','FollowSymLinks','MultiViews' ],
+      },
+      { path        => '/usr/lib/cgi-bin',
+        options     => [ '+ExecCGI','-MultiViews','+SymLinksIfOwnerMatch' ],
+        ssl_options => '+StdEnvVars',
+      },
+      { path        => '\.(cgi|shTml|phtml|php)$',
+        provider    => 'filesmatch',
+        ssl_options => '+StdEnvVars',
+      },
+    ],
+  }
+
+  # org vhost
   apache::vhost { "${::profile_apache::vhost} ssl":
     servername           => $::profile_apache::vhost,
     serveradmin          => $::profile_apache::serveradmin,
