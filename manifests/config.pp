@@ -199,18 +199,33 @@ class profile_apache::config {
     ],
   }
 
+  # install certificate bundle
   wget::fetch { 'http://www.dirict.nl/downloads/Comodo_PositiveSSL_bundle.crt':
     destination => '/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt',
   }
 
-  rsyslog::imfile { 'apache-access':
-    file_name     => $::profile_apache::access_log_file,
-    file_tag      => 'apache-access',
+  # configure syslog
+  rsyslog::imfile { "${::profile_apache::office_server_name}-error":
+    file_name     => "${::profile_apache::logroot}${::profile_apache::office_error_log}",
+    file_tag      => $::profile_apache::office_error_log,
     file_facility => 'info',
   }
-  rsyslog::imfile { 'apache-error':
-    file_name     => $::profile_apache::error_log_file,
-    file_tag      => 'apache-error',
+
+  rsyslog::imfile { "${::profile_apache::office_server_name}-access":
+    file_name     => "${::profile_apache::logroot}${::profile_apache::office_access_log}",
+    file_tag      => $::profile_apache::office_access_log,
+    file_facility => 'info',
+  }
+
+  rsyslog::imfile { "${::profile_apache::client_server_name}-error":
+    file_name     => "${::profile_apache::logroot}${::profile_apache::client_error_log}",
+    file_tag      => $::profile_apache::client_error_log,
+    file_facility => 'info',
+  }
+
+  rsyslog::imfile { "${::profile_apache::client_server_name}-access":
+    file_name     => "${::profile_apache::logroot}${::profile_apache::client_access_log}",
+    file_tag      => $::profile_apache::client_access_log,
     file_facility => 'info',
   }
 
