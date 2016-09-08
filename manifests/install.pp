@@ -89,13 +89,13 @@ class profile_apache::install {
     mpm_module             => 'prefork',
     root_directory_options => $::profile_apache::root_directory_options,
     log_level              => $::profile_apache::log_level,
+    keepalive              => 'On',
     require                => Exec[ $logpath ],
     default_mods           => [
       'php',
       'headers',
       'rewrite',
       'expires',
-      'myfixip',
     ],
   }
 
