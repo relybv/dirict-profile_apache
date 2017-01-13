@@ -3,12 +3,13 @@ HOSTS:
     roles:
       - master
     platform: ubuntu-1404-amd64
-    flavor: ha_localdisk.2c.4r.10h
+    flavor: ha_localdisk.1c.1r.20h
     hypervisor: openstack
     image: "Ubuntu 14.04 LTS"
     user: ubuntu
 
 CONFIG:
-  log_level: verbose
+  log_level: info
   type: foss
-  openstack_network: zooi.network
+  openstack_network: internal
+  color: false

@@ -18,7 +18,7 @@ describe 'profile_apache class' do
         EOS
 
         # Run it
-        apply_manifest(pp, :catch_failures => true, :future_parser => true)
+        apply_manifest(pp, :catch_failures => true)
       end
     end
 
