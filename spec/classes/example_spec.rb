@@ -11,6 +11,7 @@ describe 'profile_apache' do
             :nfs_address => "localhost",
             :db_address => "localhost",
             :ext_lb_fqdn => "localhost",
+            :win_address => "localhost",
           })
         end
 
