@@ -8,7 +8,8 @@ describe 'profile_apache' do
           facts.merge({
             :concat_basedir => "/foo",
             :monitor_address => "localhost",
-            :nfs_address=> "localhost",
+            :nfs_address => "localhost",
+            :db_address => "localhost",
           })
         end
 
