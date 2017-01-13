@@ -10,6 +10,7 @@ describe 'profile_apache' do
             :monitor_address => "localhost",
             :nfs_address => "localhost",
             :db_address => "localhost",
+            :ext_lb_fqdn => "localhost",
           })
         end
 
