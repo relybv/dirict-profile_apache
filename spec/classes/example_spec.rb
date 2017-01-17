@@ -12,6 +12,8 @@ describe 'profile_apache' do
             :db_address => "localhost",
             :ext_lb_fqdn => "localhost",
             :win_address => "localhost",
+            :ssl_cert_path => "/etc/ssl/certs/ssl-cert-default.pem",
+            :ssl_key_path => "/etc/ssl/private/ssl-cert-default.key",
           })
         end
 
