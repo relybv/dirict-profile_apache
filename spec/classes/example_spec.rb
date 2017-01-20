@@ -43,7 +43,7 @@ describe 'profile_apache' do
           it { is_expected.to contain_package('fop') }
           it { is_expected.to contain_package('dnsutils') }
           it { is_expected.to contain_package('imagemagick') }
-          it { is_expected.to contain_package('curl') }
+          it { is_expected.to contain_package('cuurl') }
 
           it { is_expected.to contain_group('notarisdossier') }
           it { is_expected.to contain_user('notarisdossier') }
