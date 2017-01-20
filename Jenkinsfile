@@ -1,6 +1,6 @@
 node {
    wrap([$class: 'AnsiColorBuildWrapper']) {
-      properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '3')), pipelineTriggers([pollSCM('H/15 * * * *')])])
+      properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '6')), pipelineTriggers([pollSCM('H/15 * * * *')])])
       stage('Checkout') { // for display purposes
          // Clean workspace before checkout
          step ([$class: 'WsCleanup'])

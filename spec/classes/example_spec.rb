@@ -48,6 +48,13 @@ describe 'profile_apache' do
           it { is_expected.to contain_group('notarisdossier') }
           it { is_expected.to contain_user('notarisdossier') }
 
+          it { is_expected.to contain_exec('mv-zf') }
+          it { is_expected.to contain_exec('tar-zf') }
+          it { is_expected.to contain_exec('/home/notarisdossier/vhostlog') }
+          it { is_expected.to contain_exec('wget-https://packages.zendframework.com/releases/ZendFramework-1.10.8/ZendFramework-1.10.8.tar.gz') }
+
+          it { is_expected.to contain_wget__fetch('http://www.dirict.nl/downloads/Comodo_PositiveSSL_bundle.crt') }
+
           it { is_expected.to contain_apache__vhost('foo.example.com non-ssl').with( 'ssl' => false ) }
           it { is_expected.to contain_apache__vhost('foo.example.com ssl').with( 'ssl' => true ) }
 
