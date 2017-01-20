@@ -3,6 +3,7 @@ require 'puppet/version'
 require 'puppet/vendor/semantic/lib/semantic' unless Puppet.version.to_f < 3.6
 require 'puppet-lint/tasks/puppet-lint'
 require 'puppet-syntax/tasks/puppet-syntax'
+require 'ci/reporter/rake/rspec'
 
 # These gems aren't always present, for instance
 # on Travis with --without development
@@ -54,7 +55,6 @@ end
 
 desc "Run spec using ci_reporter. Run as: bundle exec rake ci:all"
 namespace :ci do
-  require 'ci/reporter/rake/rspec'  
   task :all => ['ci:setup:rspec', 'spec']
 end
 
