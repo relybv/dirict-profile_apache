@@ -19,12 +19,10 @@ node {
          sh '/usr/bin/bundle exec rake lint'
       }
       stage('Spec') {
-         catchError {
-            sh '/usr/bin/bundle exec rake spec_clean'
-            sh '/usr/bin/bundle exec rake ci:all'
-            step([$class: 'JUnitResultArchiver', testResults: 'spec/reports/*.xml'])
-            junit 'spec/reports/*.xml'
-         }
+         sh '/usr/bin/bundle exec rake spec_clean'
+         sh '/usr/bin/bundle exec rake ci:all'
+         step([$class: 'JUnitResultArchiver', testResults: 'spec/reports/*.xml'])
+         junit 'spec/reports/*.xml'
       }
       stage('Documentation') {
          sh '/opt/puppetlabs/bin/puppet resource package yard provider=puppet_gem'

@@ -45,6 +45,9 @@ describe 'profile_apache' do
           it { is_expected.to contain_package('imagemagick') }
           it { is_expected.to contain_package('curl') }
 
+          it { is_expected.to contain_group('notarisdossier') }
+          it { is_expected.to contain_user('notarisdossier') }
+
           it { is_expected.to contain_apache__vhost('foo.example.com non-ssl').with( 'ssl' => false ) }
           it { is_expected.to contain_apache__vhost('foo.example.com ssl').with( 'ssl' => true ) }
 
