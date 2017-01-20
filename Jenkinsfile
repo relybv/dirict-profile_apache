@@ -23,6 +23,7 @@ node {
             sh '/usr/bin/bundle exec rake spec_clean'
             sh '/usr/bin/bundle exec rake ci:all'
             step([$class: 'JUnitResultArchiver', testResults: 'spec/reports/*.xml'])
+            junit 'spec/reports/*.xml'
          }
       }
       stage('Documentation') {
