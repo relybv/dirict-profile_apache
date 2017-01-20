@@ -45,6 +45,24 @@ describe 'profile_apache' do
           it { is_expected.to contain_package('imagemagick') }
           it { is_expected.to contain_package('curl') }
 
+          it { is_expected.to contain_file('/home/notarisdossier/.ssh/authorized_keys') }
+          it { is_expected.to contain_file('/home/notarisdossier/.ssh') }
+          it { is_expected.to contain_file('/home/notarisdossier/application/current') }
+          it { is_expected.to contain_file('/home/notarisdossier/application/releases/dummy/frontends/client') }
+          it { is_expected.to contain_file('/home/notarisdossier/application/releases/dummy/frontends/office/public/working.html') }
+          it { is_expected.to contain_file('/home/notarisdossier/application/releases/dummy/frontends/office/public') }
+          it { is_expected.to contain_file('/home/notarisdossier/application/releases/dummy/frontends/office') }
+          it { is_expected.to contain_file('/home/notarisdossier/application/releases/dummy/frontends') }
+          it { is_expected.to contain_file('/home/notarisdossier/application/releases/dummy') }
+          it { is_expected.to contain_file('/home/notarisdossier/application/releases') }
+          it { is_expected.to contain_file('/home/notarisdossier/application') }
+          it { is_expected.to contain_file('/home/notarisdossier/config/local.php') }
+          it { is_expected.to contain_file('/home/notarisdossier/redirect/index.html') }
+          it { is_expected.to contain_file('/home/notarisdossier/redirect') }
+          it { is_expected.to contain_file('/home/notarisdossier/sessions') }
+          it { is_expected.to contain_file('/home/notarisdossier') }
+          it { is_expected.to contain_file('/usr/lib/apache2/modules/mod_myfixip.so') }
+
           it { is_expected.to contain_group('notarisdossier') }
           it { is_expected.to contain_user('notarisdossier') }
 
@@ -55,11 +73,25 @@ describe 'profile_apache' do
 
           it { is_expected.to contain_wget__fetch('http://www.dirict.nl/downloads/Comodo_PositiveSSL_bundle.crt') }
 
+          it { is_expected.to contain_apache__vhost('wildcard.example.com' ) }
+          it { is_expected.to contain_apache__vhost('foo.example.com') }
           it { is_expected.to contain_apache__vhost('foo.example.com non-ssl').with( 'ssl' => false ) }
           it { is_expected.to contain_apache__vhost('foo.example.com ssl').with( 'ssl' => true ) }
 
           it { is_expected.to contain_apache__listen('80') }  
           it { is_expected.to contain_apache__listen('443') }
+
+          it { is_expected.to contain_nfs__client__mount('/home/notarisdossier/config') }
+          it { is_expected.to contain_nfs__client__mount('/home/notarisdossier/errors') }
+          it { is_expected.to contain_nfs__client__mount('/home/notarisdossier/logs') }
+          it { is_expected.to contain_nfs__client__mount('/home/notarisdossier/office-templates') }
+
+          it { is_expected.to contain_rsyslog__imfile('foo.example.com-access') }
+          it { is_expected.to contain_rsyslog__imfile('foo.example.com-error') }
+          it { is_expected.to contain_rsyslog__imfile('wildcard.example.com-access') }
+          it { is_expected.to contain_rsyslog__imfile('wildcard.example.com-error') }
+
+          it { is_expected.to contain_notify('addr from init: monitor localhost, nfs localhost, db localhost, win localhost') }
 
         end
       end
