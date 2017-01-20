@@ -251,9 +251,19 @@ class profile_apache::config {
 
   if $profile_apache::nfs_address == undef {
     # no nfs server defined
-    exec { '/bin/mkdir -p /home/notarisdossier/application/current/frontends/office/public/':
+    exec { '/bin/mkdir -p /home/notarisdossier/application/current/frontends/office/public':
       creates => '/home/notarisdossier/application/current/frontends/office/public/',
-      before  => Apache::Vhost[ "${::profile_apache::vhost} ssl" ],
+      before  => Apache::Vhost["${::profile_apache::vhost} ssl"],
+    }
+    exec { '/bin/mkdir -p /home/notarisdossier/application/current/frontends/client':
+      creates => '/home/notarisdossier/application/current/frontends/client/',
+      before  => Apache::Vhost["${::profile_apache::vhost} ssl"],
+    }
+    file { ['/home/notarisdossier/config', '/home/notarisdossier/office-templates', '/home/notarisdossier/errors', '/home/notarisdossier/logs', '/home/notarisdossier/application/current',]:
+      ensure  => directory,
+      owner   => 'notarisdossier',
+      before  => Apache::Vhost["${::profile_apache::vhost} ssl"],
+      require => User['notarisdossier'],
     }
     notify { 'local directory, no nfs server found': }
   }
