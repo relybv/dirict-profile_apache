@@ -22,7 +22,7 @@ node {
          catchError {
             sh '/usr/bin/bundle exec rake spec_clean'
             sh '/usr/bin/bundle exec rake ci:all'
-            step([$class: 'JUnitResultArchiver', testResults: '*/spec/reports/.xml'])
+            step([$class: 'JUnitResultArchiver', testResults: 'spec/reports/*.xml'])
          }
       }
       stage('Documentation') {
