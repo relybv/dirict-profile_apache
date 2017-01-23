@@ -37,6 +37,7 @@ node {
                    sh "grep --quiet Failures openstack-ubuntu-server-1404-x64.log"
                    sh "grep -A100000 Failures openstack-ubuntu-server-1404-x64.log"
                    currentBuild.result = 'FAILURE'
+                   emailext attachLog: true, body: '', recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'SUCCESS', to: 'paulgomersbach+euxeg3u1sxmmdpq07rcm@boards.trello.com'
                 } catch (Exception err) {
                    currentBuild.result = 'SUCCESS'
                 }
