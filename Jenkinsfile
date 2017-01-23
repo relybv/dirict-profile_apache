@@ -43,8 +43,28 @@ node {
                          currentBuild.result = 'SUCCESS'
                       }
                   },
-                  ubuntu1604: { sh 'BEAKER_set="openstack-ubuntu-server-1604-x64" /usr/bin/bundle exec rake setbeaker_env > openstack-ubuntu-server-1604-x64.log' },
-                  debian78: { sh 'BEAKER_set="openstack-debian-78-x64" /usr/bin/bundle exec rake setbeaker_env > openstack-debian-78-x64.log' }
+                  ubuntu1604: {
+                      sh 'BEAKER_set="openstack-ubuntu-server-1604-x64" /usr/bin/bundle exec rake setbeaker_env > openstack-ubuntu-server-1604-x64.log'
+                      try {
+                         // False if failures in logfile
+                         sh "grep --quiet Failures openstack-ubuntu-server-1604-x64.log"
+                         sh "grep -A100000 Failures openstack-ubuntu-server-1604-x64.log"
+                         currentBuild.result = 'FAILURE'
+                      } catch (Exception err) {
+                         currentBuild.result = 'SUCCESS'
+                      }
+                  },
+                  debian78: {
+                      sh 'BEAKER_set="openstack-debian-78-x64" /usr/bin/bundle exec rake setbeaker_env > openstack-debian-78-x64.log'
+                      try {
+                         // False if failures in logfile
+                         sh "grep --quiet Failures openstack-debian-78-x64.log"
+                         sh "grep -A100000 Failures openstack-debian-78-x64.log"
+                         currentBuild.result = 'FAILURE'
+                      } catch (Exception err) {
+                         currentBuild.result = 'SUCCESS'
+                      }
+                  }
                )
             }
          }
