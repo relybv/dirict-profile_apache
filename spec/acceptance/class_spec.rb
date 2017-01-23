@@ -26,6 +26,11 @@ describe 'profile_apache class' do
       it { is_expected.to be_installed }
     end
 
+    describe package('ONZIN') do
+      it { is_expected.to be_installed }
+    end
+
+
     describe service('apache2') do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
