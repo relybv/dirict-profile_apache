@@ -39,7 +39,9 @@ node {
                          sh "grep --quiet Failures openstack-ubuntu-server-1404-x64.log"
                          currentBuild.result = 'SUCCESS'
                       } catch (Exception err) {
+                         // set build to failure and display logfile from failure point
                          currentBuild.result = 'FAILURE'
+                         sh "grep -A100000 Failures openstack-ubuntu-server-1404-x64.log"
                       }
                   },
                   ubuntu1604: { sh 'BEAKER_set="openstack-ubuntu-server-1604-x64" /usr/bin/bundle exec rake setbeaker_env > openstack-ubuntu-server-1604-x64.log' },
