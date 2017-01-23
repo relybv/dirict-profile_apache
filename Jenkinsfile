@@ -39,5 +39,12 @@ node {
             }
          }
       }
+      try {
+         // True if failures in logfile
+         sh "grep --quiet Failures openstack-ubuntu-server-1404-x64.log"
+         currentBuild.result = 'SUCCESS'
+      } catch (Exception err) {
+         currentBuild.result = 'FAILURE'
+      }
    }
 }
