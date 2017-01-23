@@ -78,4 +78,5 @@ node {
          }
       }
    }
+   archiveArtifacts '*.log'
 }
