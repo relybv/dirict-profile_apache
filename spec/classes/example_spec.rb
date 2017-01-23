@@ -29,7 +29,7 @@ describe 'profile_apache' do
           it { is_expected.to contain_class('profile_apache::service') }
           it { is_expected.to contain_class('apache') }
 
-          it { is_expected.to contain_package('Xpdftk') }
+          it { is_expected.to contain_package('pdftk') }
           it { is_expected.to contain_package('php5-common') }
           it { is_expected.to contain_package('php5-cli') }
           it { is_expected.to contain_package('php5-mcrypt') }
