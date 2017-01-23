@@ -49,7 +49,7 @@ node {
                          // False if failures in logfile
                          sh "grep --quiet Failures openstack-ubuntu-server-1604-x64.log"
                          sh "grep -A100000 Failures openstack-ubuntu-server-1604-x64.log"
-                         currentBuild.result = 'FAILURE'
+                         currentBuild.result = 'UNSTABLE'
                       } catch (Exception err) {
                          currentBuild.result = 'SUCCESS'
                       }
