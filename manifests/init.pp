@@ -83,8 +83,8 @@ class profile_apache
 
   notify {"addr from init: monitor ${monitor_address}, nfs ${nfs_address}, db ${db_address}, win ${win_address}": }
 
-  class { '::profile_apache::install': } ->
-  class { '::profile_apache::config': } ~>
-  class { '::profile_apache::service': } ->
-  Class['::profile_apache']
+  class { '::profile_apache::install': }
+  -> class { '::profile_apache::config': }
+  ~> class { '::profile_apache::service': }
+  -> Class['::profile_apache']
 }
