@@ -2,7 +2,7 @@ fixtures:
   repositories:
     stdlib:
       repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
-      ref: "4.12.0"
+      ref: "4.13.1"
     ntp: "https://github.com/puppetlabs/puppetlabs-ntp.git"
     apache: "https://github.com/puppetlabs/puppetlabs-apache.git"
     rsyslog: "https://github.com/saz/puppet-rsyslog.git"
