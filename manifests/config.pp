@@ -8,6 +8,8 @@ class profile_apache::config {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
+  notice ("client_server_name is: ${::profile_apache::client_server_name}")
+
   # create group
   group { 'notarisdossier':
     ensure => present,
