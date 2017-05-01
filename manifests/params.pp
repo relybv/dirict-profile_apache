@@ -20,8 +20,9 @@ class profile_apache::params {
   $zendversion = '1.10.8'
   $vhost = $::fqdn
   $docroot = '/home/notarisdossier/application/current/frontends/office/public/'
-  $php_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap',
+  $php5_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap',
   'php5-xsl','dnsutils','php5-mysql','libapache2-mod-php5', 'fop', 'imagemagick', 'dnsutils', 'curl']
+  $php7_packages = ['libapache2-mod-php','pdftk','dnsutils','fop', 'imagemagick', 'dnsutils', 'curl']
   $monitor_address = $::monitor_address
   $nfs_address = $::nfs_address
   $db_address = $::db_address
@@ -47,10 +48,14 @@ class profile_apache::params {
 
   case $::osfamily {
     'Debian': {
-      $packages = $php_packages
+      if $::operatingsystemrelease == '16.04' {
+        $packages = $php7_packages
+      } else {
+        $packages = $php5_packages
+      }
     }
     'RedHat', 'Amazon': {
-      $packages = $php_packages
+      $packages = $php5_packages
     }
     default: {
       fail("${::operatingsystem} not supported")

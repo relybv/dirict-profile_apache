@@ -29,21 +29,31 @@ describe 'profile_apache' do
           it { is_expected.to contain_class('profile_apache::service') }
           it { is_expected.to contain_class('apache') }
 
-          it { is_expected.to contain_package('pdftk') }
-          it { is_expected.to contain_package('php5-common') }
-          it { is_expected.to contain_package('php5-cli') }
-          it { is_expected.to contain_package('php5-mcrypt') }
-          it { is_expected.to contain_package('php5-imagick') }
-          it { is_expected.to contain_package('php5-curl') }
-          it { is_expected.to contain_package('php5-gd') }
-          it { is_expected.to contain_package('php5-imap') }
-          it { is_expected.to contain_package('php5-xsl') }
-          it { is_expected.to contain_package('php5-mysql') }
-          it { is_expected.to contain_package('libapache2-mod-php5') }
-          it { is_expected.to contain_package('fop') }
-          it { is_expected.to contain_package('dnsutils') }
-          it { is_expected.to contain_package('imagemagick') }
-          it { is_expected.to contain_package('curl') }
+          case facts[:operatingsystemrelease]
+          when '16.04'
+            it { is_expected.to contain_package('libapache2-mod-php') }
+            it { is_expected.to contain_package('pdftk') }
+            it { is_expected.to contain_package('fop') }
+            it { is_expected.to contain_package('dnsutils') }
+            it { is_expected.to contain_package('imagemagick') }
+            it { is_expected.to contain_package('curl') }
+          else
+            it { is_expected.to contain_package('php5-common') }
+            it { is_expected.to contain_package('php5-cli') }
+            it { is_expected.to contain_package('php5-mcrypt') }
+            it { is_expected.to contain_package('php5-imagick') }
+            it { is_expected.to contain_package('php5-curl') }
+            it { is_expected.to contain_package('php5-gd') }
+            it { is_expected.to contain_package('php5-imap') }
+            it { is_expected.to contain_package('php5-xsl') }
+            it { is_expected.to contain_package('php5-mysql') }
+            it { is_expected.to contain_package('libapache2-mod-php5') }
+            it { is_expected.to contain_package('pdftk') }
+            it { is_expected.to contain_package('fop') }
+            it { is_expected.to contain_package('dnsutils') }
+            it { is_expected.to contain_package('imagemagick') }
+            it { is_expected.to contain_package('curl') }
+          end
 
           it { is_expected.to contain_file('/home/notarisdossier/.ssh/authorized_keys') }
           it { is_expected.to contain_file('/home/notarisdossier/.ssh') }
