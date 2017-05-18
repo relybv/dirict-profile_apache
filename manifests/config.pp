@@ -81,6 +81,9 @@ class profile_apache::config {
     require => User['notarisdossier'],
   }
 
+  # enable status page
+  class {'::apache::mod::status':}
+
   # create vhosts
   # redirect vhost
   apache::vhost { "${::profile_apache::vhost} non-ssl":
