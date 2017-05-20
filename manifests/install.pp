@@ -103,8 +103,5 @@ class profile_apache::install {
     ssl_compression => false,
   }
 
-  file { '/usr/lib/apache2/modules/mod_myfixip.so':
-    source  => 'puppet:///modules/profile_apache/mod_myfixip.so',
-  }
 
 }
