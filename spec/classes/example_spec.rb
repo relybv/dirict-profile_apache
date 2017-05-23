@@ -71,7 +71,6 @@ describe 'profile_apache' do
           it { is_expected.to contain_file('/home/notarisdossier/redirect') }
           it { is_expected.to contain_file('/home/notarisdossier/sessions') }
           it { is_expected.to contain_file('/home/notarisdossier') }
-          it { is_expected.to contain_file('/usr/lib/apache2/modules/mod_myfixip.so') }
 
           it { is_expected.to contain_group('notarisdossier') }
           it { is_expected.to contain_user('notarisdossier') }
