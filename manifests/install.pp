@@ -89,6 +89,9 @@ class profile_apache::install {
     mpm_module             => 'prefork',
     root_directory_options => $::profile_apache::root_directory_options,
     log_level              => $::profile_apache::log_level,
+    log_formats            => {
+      vhost_common => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" \"%{X-Forwarded-For}i\"',
+    },
     keepalive              => 'On',
     require                => Exec[ $logpath ],
     default_mods           => [
