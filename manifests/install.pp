@@ -90,7 +90,8 @@ class profile_apache::install {
     root_directory_options => $::profile_apache::root_directory_options,
     log_level              => $::profile_apache::log_level,
     log_formats            => {
-      combined => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" \"%{X-Forwarded-For}i\"',
+#      combined => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" \"%{X-Forwarded-For}i\"',
+      combined => '%{X-Forwarded-For} %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"',
     },
     keepalive              => 'On',
     require                => Exec[ $logpath ],
