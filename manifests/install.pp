@@ -94,6 +94,7 @@ class profile_apache::install {
       combined => '%{X-Forwarded-For}i %l %u %t \"%r\" %s %b \"%{Referer}i\" \"%{User-agent}i\"',
     },
     keepalive              => 'On',
+    max_keepalive_requests => '250',
     require                => Exec[ $logpath ],
     default_mods           => [
       'php',
