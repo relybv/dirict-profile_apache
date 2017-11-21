@@ -86,7 +86,7 @@ class profile_apache::install {
 
   class { 'apache':
     default_vhost          => false,
-    mpm_module             => 'prefork',
+    mpm_module             => false,
     root_directory_options => $::profile_apache::root_directory_options,
     log_level              => $::profile_apache::log_level,
     log_formats            => {
@@ -107,5 +107,13 @@ class profile_apache::install {
     ssl_compression => false,
   }
 
+  class { 'apache::mod::prefork':
+    startservers        => '10',
+    minspareservers     => '10',
+    maxspareservers     => '20',
+    serverlimit         => '256',
+    maxclients          => '256',
+    maxrequestsperchild => '100',
+  }
 
 }
