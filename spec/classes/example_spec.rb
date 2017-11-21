@@ -72,6 +72,8 @@ describe 'profile_apache' do
           it { is_expected.to contain_file('/home/notarisdossier/sessions') }
           it { is_expected.to contain_file('/home/notarisdossier') }
 
+          it { is_expected.to contain_File_line('upload_max_filesize') }
+
           it { is_expected.to contain_group('notarisdossier') }
           it { is_expected.to contain_user('notarisdossier') }
 

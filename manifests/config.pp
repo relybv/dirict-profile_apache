@@ -10,6 +10,14 @@ class profile_apache::config {
 
   notice ("client_server_name is: ${::profile_apache::client_server_name}")
 
+  # php settings
+  file_line { 'upload_max_filesize':
+    ensure => present,
+    path   => '/etc/php5/apache2/php.ini',
+    line   => 'upload_max_filesize = 16M',
+    match  => '^upload_max_filesize = 2M',
+  }
+
   # create group
   group { 'notarisdossier':
     ensure => present,
