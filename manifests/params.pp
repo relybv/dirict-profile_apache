@@ -29,7 +29,7 @@ class profile_apache::params {
   $serveradmin = 'webmaster@notarisdossier.nl'
   $root_directory_options = [ 'FollowSymLinks']
   $scriptalias = '/cgi-bin/ /usr/lib/cgi-bin/'
-  $log_level = 'warn'
+  $log_level = 'info'
   $logroot = '/home/notarisdossier/vhostlog/'
   $error_log_file = 'pro.notarisdossier.nl.log'
   $access_log_file = 'pro.notarisdossier.nl.ssl_access.log'
