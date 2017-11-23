@@ -3,6 +3,7 @@ fixtures:
     stdlib:
       repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
     ntp: "https://github.com/puppetlabs/puppetlabs-ntp.git"
+    apt : "https://github.com/puppetlabs/puppetlabs-apt.git"
     apache: "https://github.com/puppetlabs/puppetlabs-apache.git"
     rsyslog: "https://github.com/saz/puppet-rsyslog.git"
     concat:

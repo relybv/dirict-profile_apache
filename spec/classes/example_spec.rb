@@ -38,6 +38,7 @@ describe 'profile_apache' do
             it { is_expected.to contain_package('imagemagick') }
             it { is_expected.to contain_package('curl') }
           else
+            it { is_expected.to contain_apt__source('php56') }
             it { is_expected.to contain_package('php5-common') }
             it { is_expected.to contain_package('php5-cli') }
             it { is_expected.to contain_package('php5-mcrypt') }
@@ -54,6 +55,8 @@ describe 'profile_apache' do
             it { is_expected.to contain_package('imagemagick') }
             it { is_expected.to contain_package('curl') }
             it { is_expected.to contain_package('graphviz') }
+            it { is_expected.to contain_package('php-pear') }
+            it { is_expected.to contain_package('php5-dev') }
           end
 
           it { is_expected.to contain_file('/home/notarisdossier/.ssh/authorized_keys') }
@@ -82,6 +85,10 @@ describe 'profile_apache' do
           it { is_expected.to contain_exec('tar-zf') }
           it { is_expected.to contain_exec('/home/notarisdossier/vhostlog') }
           it { is_expected.to contain_exec('wget-https://packages.zendframework.com/releases/ZendFramework-1.10.8/ZendFramework-1.10.8.tar.gz') }
+          it { is_expected.to contain_exec('download-libsodium') }
+          it { is_expected.to contain_exec('install-libsodium') }
+          it { is_expected.to contain_exec('make-libsodium') }
+          it { is_expected.to contain_exec('tar-libsodium') }
 
           it { is_expected.to contain_wget__fetch('http://www.dirict.nl/downloads/Comodo_PositiveSSL_bundle.crt') }
 

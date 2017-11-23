@@ -5,13 +5,28 @@
 class profile_apache::install {
   $zendversion = $::profile_apache::zendversion
   $zendurl = "https://packages.zendframework.com/releases/ZendFramework-${zendversion}/ZendFramework-${zendversion}.tar.gz"
-  $destination = "/tmp/ZendFramework-${zendversion}.tar.gz"
+  $zenddestination = "/tmp/ZendFramework-${zendversion}.tar.gz"
+  $libsodiumurl = 'https://download.libsodium.org/libsodium/releases/LATEST.tar.gz'
   include nfs::client
   include wget
+  include apt
 
   # prevent direct use of subclass
   if $caller_module_name != $module_name {
     fail("Use of private class ${name} by ${caller_module_name}")
+  }
+
+  # add php5.6 repo
+  apt::source { 'php56':
+    location => 'http://packages.dotdeb.org',
+    release  => 'wheezy-php56',
+    repos    => 'all',
+    key      => {
+      'id'     => '7E3F070089DF5277',
+      'source' => 'http://www.dotdeb.org/dotdeb.gpg',
+    },
+    before   => Package['php-pear'],
+    notify   => Exec['apt_update'],
   }
 
   # install packages
@@ -19,14 +34,14 @@ class profile_apache::install {
 
   # install zend framework
   exec { "wget-${zendurl}":
-    command => "wget --no-check-certificate ${zendurl} -O ${destination}",
+    command => "wget --no-check-certificate ${zendurl} -O ${zenddestination}",
     path    => '/usr/bin',
-    creates => $destination,
+    creates => $zenddestination,
     notify  => Exec[ 'tar-zf' ],
   }
 
   exec { 'tar-zf':
-    command     => "/bin/tar -xzf ${destination}",
+    command     => "/bin/tar -xzf ${zenddestination}",
     cwd         => '/tmp',
     refreshonly => true,
     notify      => Exec[ 'mv-zf' ],
@@ -117,6 +132,35 @@ class profile_apache::install {
     serverlimit         => '256',
     maxclients          => '256',
     maxrequestsperchild => '100',
+  }
+
+  # build and install libsodium
+  exec { 'download-libsodium':
+    cwd     => '/tmp',
+    command => "/usr/bin/curl --silent ${libsodiumurl} -o /tmp/libsodium.tar.gz",
+    creates => '/tmp/libsodium.tar.gz',
+    notify  => Exec[ 'tar-libsodium' ],
+  }
+
+  exec { 'tar-libsodium':
+    command     => '/bin/tar -xzf libsodium.tar.gz',
+    refreshonly => true,
+    cwd         => '/tmp',
+    notify      => Exec[ 'make-libsodium' ],
+  }
+
+  exec { 'make-libsodium':
+    command     => '/tmp/libsodium-stable/configure && /usr/bin/make -j 4 && /usr/bin/make -j 4 check',
+    refreshonly => true,
+    cwd         => '/tmp/libsodium-stable',
+    notify      => Exec[ 'install-libsodium' ],
+  }
+
+  exec { 'install-libsodium':
+    command     => '/usr/bin/make install',
+    refreshonly => true,
+    cwd         => '/tmp/libsodium-stable',
+    creates     => '/usr/local/lib/pkgconfig/libsodium.pc',
   }
 
 }
