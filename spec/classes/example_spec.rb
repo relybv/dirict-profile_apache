@@ -85,10 +85,9 @@ describe 'profile_apache' do
           it { is_expected.to contain_exec('tar-zf') }
           it { is_expected.to contain_exec('/home/notarisdossier/vhostlog') }
           it { is_expected.to contain_exec('wget-https://packages.zendframework.com/releases/ZendFramework-1.10.8/ZendFramework-1.10.8.tar.gz') }
-          it { is_expected.to contain_exec('download-libsodium') }
-#          it { is_expected.to contain_exec('install-libsodium') }
-          it { is_expected.to contain_exec('make-libsodium') }
-          it { is_expected.to contain_exec('tar-libsodium') }
+          it { is_expected.to contain_exec('copy-libsodium') }
+          it { is_expected.to contain_file('libsodium.so') }
+          it { is_expected.to contain_file('libsodium.so.18') }
 
           it { is_expected.to contain_wget__fetch('http://www.dirict.nl/downloads/Comodo_PositiveSSL_bundle.crt') }
 

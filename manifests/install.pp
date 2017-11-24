@@ -134,38 +134,18 @@ class profile_apache::install {
     maxrequestsperchild => '100',
   }
 
-  # build and install libsodium
-  exec { 'download-libsodium':
-    cwd     => '/tmp',
-    command => "/usr/bin/curl --silent ${libsodiumurl} -o /tmp/libsodium.tar.gz",
-    creates => '/tmp/libsodium.tar.gz',
-    notify  => Exec[ 'tar-libsodium' ],
-  }
-
-  exec { 'tar-libsodium':
-    command     => '/bin/tar -xzf libsodium.tar.gz',
-    refreshonly => true,
-    cwd         => '/tmp',
-    notify      => Exec[ 'make-libsodium' ],
-  }
-
-  exec { 'make-libsodium':
-    command     => '/tmp/libsodium-stable/configure && /usr/bin/make -j 4 && /usr/bin/make -j 4 check',
-    refreshonly => true,
-    cwd         => '/tmp/libsodium-stable',
-#    notify      => Exec[ 'install-libsodium' ],
-  }
-
-#  exec { 'install-libsodium':
-#    command     => '/usr/bin/make install',
-#    refreshonly => true,
-#    cwd         => '/tmp/libsodium-stable',
-#    creates     => '/usr/local/lib/pkgconfig/libsodium.pc',
-#  }
-
+  # install libsodium
   file { 'libsodium.so':
     path   => '/tmp/libsodium.so',
     source => 'puppet:///modules/profile_apache/libsodium.so',
+    notify => Exec['copy-libsodium'],
+  }
+
+  exec { 'copy-libsodium':
+    path        => '/usr/bin',
+    command     => 'for d in */; do cp /tmp/libsodium.so "$d"; done',
+    cwd         => '/usr/lib/php5',
+    refreshonly => true,
   }
 
   file { 'libsodium.so.18':
