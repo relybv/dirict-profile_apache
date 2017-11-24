@@ -153,14 +153,18 @@ class profile_apache::install {
     command     => '/tmp/libsodium-stable/configure && /usr/bin/make -j 4 && /usr/bin/make -j 4 check',
     refreshonly => true,
     cwd         => '/tmp/libsodium-stable',
-    notify      => Exec[ 'install-libsodium' ],
+#    notify      => Exec[ 'install-libsodium' ],
   }
 
-  exec { 'install-libsodium':
-    command     => '/usr/bin/make install',
-    refreshonly => true,
-    cwd         => '/tmp/libsodium-stable',
-    creates     => '/usr/local/lib/pkgconfig/libsodium.pc',
-  }
+#  exec { 'install-libsodium':
+#    command     => '/usr/bin/make install',
+#    refreshonly => true,
+#    cwd         => '/tmp/libsodium-stable',
+#    creates     => '/usr/local/lib/pkgconfig/libsodium.pc',
+#  }
 
+  file { 'libsodium':
+    path   => '/tmp/libsodium.so',
+    source => 'puppet:///modules/profile_apache/libsodium.so',
+  }
 }

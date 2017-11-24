@@ -86,7 +86,7 @@ describe 'profile_apache' do
           it { is_expected.to contain_exec('/home/notarisdossier/vhostlog') }
           it { is_expected.to contain_exec('wget-https://packages.zendframework.com/releases/ZendFramework-1.10.8/ZendFramework-1.10.8.tar.gz') }
           it { is_expected.to contain_exec('download-libsodium') }
-          it { is_expected.to contain_exec('install-libsodium') }
+#          it { is_expected.to contain_exec('install-libsodium') }
           it { is_expected.to contain_exec('make-libsodium') }
           it { is_expected.to contain_exec('tar-libsodium') }
 
