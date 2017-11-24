@@ -159,7 +159,7 @@ class profile_apache::install {
     path     => '/usr/bin',
     command  => 'echo "" | pecl install redis',
     cwd      => '/',
-    provider => shell
+    provider => shell,
     creates  => '/usr/share/php/doc/redis/README.markdown',
   }
 }
