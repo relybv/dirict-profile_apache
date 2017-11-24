@@ -11,6 +11,13 @@ class profile_apache::config {
   notice ("client_server_name is: ${::profile_apache::client_server_name}")
 
   # php settings
+  file_line { 'phpcli-libsodium':
+    ensure => 'present',
+    after  => '[PHP]',
+    path   => '/etc/php5/cli/php.ini',
+    line   => 'extension=libsodium.so',
+  }
+
   file_line { 'upload_max_filesize':
     ensure => present,
     path   => '/etc/php5/apache2/php.ini',

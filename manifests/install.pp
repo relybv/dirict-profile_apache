@@ -142,9 +142,10 @@ class profile_apache::install {
   }
 
   exec { 'copy-libsodium':
-    path        => '/usr/bin',
+    path        => '/bin',
     command     => 'for d in */; do cp /tmp/libsodium.so "$d"; done',
     cwd         => '/usr/lib/php5',
+    provider    => shell,
     refreshonly => true,
   }
 
