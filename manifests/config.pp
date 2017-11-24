@@ -13,7 +13,7 @@ class profile_apache::config {
   # php settings
   file_line { 'phpcli-libsodium':
     ensure             => 'present',
-    after              => '^; PHP's initialization file',
+    after              => 'PHP\'s initialization file',
     path               => '/etc/php5/cli/php.ini',
     line               => 'extension=libsodium.so',
     append_on_no_match => false,
