@@ -156,10 +156,9 @@ class profile_apache::install {
 
   # install php redis
   exec { 'install-redis':
-    path     => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
-    command  => 'pecl install redis',
-    cwd      => '/',
-    creates  => '/usr/share/php/doc/redis/README.markdown',
-    require  => Package['php5-dev'],
+    path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
+    command => 'pecl install redis',
+    cwd     => '/',
+    creates => '/usr/share/php/doc/redis/README.markdown',
   }
 }

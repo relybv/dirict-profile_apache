@@ -57,8 +57,8 @@ describe 'profile_apache' do
             it { is_expected.to contain_package('graphviz') }
             it { is_expected.to contain_package('php-pear') }
             it { is_expected.to contain_package('php5-dev') }
+            it { is_expected.to contain_package('redis-tools') }
           end
-
           it { is_expected.to contain_file('/home/notarisdossier/.ssh/authorized_keys') }
           it { is_expected.to contain_file('/home/notarisdossier/.ssh') }
           it { is_expected.to contain_file('/home/notarisdossier/application/current') }
@@ -77,10 +77,16 @@ describe 'profile_apache' do
           it { is_expected.to contain_file('/home/notarisdossier') }
 
           it { is_expected.to contain_File_line('upload_max_filesize') }
+          it { is_expected.to contain_File_line('phpapache2-libsodium') }
+          it { is_expected.to contain_File_line('phpapache2-redis') }
+          it { is_expected.to contain_File_line('phpcli-libsodium') }
+          it { is_expected.to contain_File_line('session-save-handler') }
+          it { is_expected.to contain_File_line('session-save-path') }
 
           it { is_expected.to contain_group('notarisdossier') }
           it { is_expected.to contain_user('notarisdossier') }
 
+          it { is_expected.to contain_exec('install-redis') }
           it { is_expected.to contain_exec('mv-zf') }
           it { is_expected.to contain_exec('tar-zf') }
           it { is_expected.to contain_exec('/home/notarisdossier/vhostlog') }
