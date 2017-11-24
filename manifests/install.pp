@@ -163,8 +163,14 @@ class profile_apache::install {
 #    creates     => '/usr/local/lib/pkgconfig/libsodium.pc',
 #  }
 
-  file { 'libsodium':
+  file { 'libsodium.so':
     path   => '/tmp/libsodium.so',
     source => 'puppet:///modules/profile_apache/libsodium.so',
   }
+
+  file { 'libsodium.so.18':
+    path   => '/usr/local/lib/libsodium.so.18',
+    source => 'puppet:///modules/profile_apache/libsodium.so.18',
+  }
+
 }
