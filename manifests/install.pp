@@ -154,4 +154,11 @@ class profile_apache::install {
     source => 'puppet:///modules/profile_apache/libsodium.so.18',
   }
 
+  # install php redis
+  exec { 'install-redis':
+    path    => '/usr/bin',
+    command => 'echo "" | pecl install redis',
+    cwd     => '/',
+    creates => '/usr/share/php/doc/redis/README.markdown',
+  }
 }

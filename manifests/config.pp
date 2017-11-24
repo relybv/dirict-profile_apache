@@ -19,6 +19,36 @@ class profile_apache::config {
     append_on_no_match => false,
   }
 
+  file_line { 'phpapache2-libsodium':
+    ensure             => 'present',
+    after              => 'PHP\'s initialization file',
+    path               => '/etc/php5/apache2/php.ini',
+    line               => 'extension=libsodium.so',
+    append_on_no_match => false,
+  }
+
+  file_line { 'phpapache2-redis':
+    ensure             => 'present',
+    after              => 'PHP\'s initialization file',
+    path               => '/etc/php5/apache2/php.ini',
+    line               => 'extension=redis.so',
+    append_on_no_match => false,
+  }
+
+  file_line { 'session-save-handler':
+    ensure => present,
+    path   => '/etc/php5/apache2/php.ini',
+    line   => 'session.save_handler = redis',
+    match  => '^session.save_handler = files',
+  }
+
+  file_line { 'session-save-path':
+    ensure => present,
+    path   => '/etc/php5/apache2/php.ini',
+    line   => 'session.save_path = tcp://172.0.20.101:6379',
+    match  => '^;session.save_path',
+  }
+
   file_line { 'upload_max_filesize':
     ensure => present,
     path   => '/etc/php5/apache2/php.ini',
