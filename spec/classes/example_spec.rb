@@ -110,6 +110,8 @@ describe 'profile_apache' do
           it { is_expected.to contain_nfs__client__mount('/home/notarisdossier/errors') }
           it { is_expected.to contain_nfs__client__mount('/home/notarisdossier/logs') }
           it { is_expected.to contain_nfs__client__mount('/home/notarisdossier/office-templates') }
+          it { is_expected.to contain_nfs__client__mount('/home/notarisdossier/cache') }
+          it { is_expected.to contain_nfs__client__mount('/home/notarisdossier/tmp') }
 
           it { is_expected.to contain_rsyslog__imfile('foo.example.com-access') }
           it { is_expected.to contain_rsyslog__imfile('foo.example.com-error') }

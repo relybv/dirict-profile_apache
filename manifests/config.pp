@@ -331,6 +331,24 @@ class profile_apache::config {
       replace => false,
     }
 
+    nfs::client::mount { '/home/notarisdossier/cache':
+      server => $nfs_address,
+      share  => '/mnt/nfs/cache',
+      mount  => '/home/notarisdossier/cache',
+      owner  => 'www-data',
+      group  => 'notarisdossier',
+      atboot => true,
+    }
+
+    nfs::client::mount { '/home/notarisdossier/tmp':
+      server => $nfs_address,
+      share  => '/mnt/nfs/tmp',
+      mount  => '/home/notarisdossier/tmp',
+      owner  => 'www-data',
+      group  => 'notarisdossier',
+      atboot => true,
+    }
+
     nfs::client::mount { '/home/notarisdossier/config':
       server => $nfs_address,
       share  => '/mnt/nfs/config',
