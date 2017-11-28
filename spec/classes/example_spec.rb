@@ -58,6 +58,12 @@ describe 'profile_apache' do
             it { is_expected.to contain_package('php-pear') }
             it { is_expected.to contain_package('php5-dev') }
             it { is_expected.to contain_package('redis-tools') }
+            it { is_expected.to contain_File_line('upload_max_filesize') }
+            it { is_expected.to contain_File_line('phpapache2-libsodium') }
+            it { is_expected.to contain_File_line('phpapache2-redis') }
+            it { is_expected.to contain_File_line('phpcli-libsodium') }
+            it { is_expected.to contain_File_line('session-save-handler') }
+            it { is_expected.to contain_File_line('session-save-path') }
           end
           it { is_expected.to contain_package('openssl').with( 'ensure' => 'latest' ) }
           it { is_expected.to contain_file('/home/notarisdossier/.ssh/authorized_keys') }
@@ -76,13 +82,6 @@ describe 'profile_apache' do
           it { is_expected.to contain_file('/home/notarisdossier/redirect') }
           it { is_expected.to contain_file('/home/notarisdossier/sessions') }
           it { is_expected.to contain_file('/home/notarisdossier') }
-
-          it { is_expected.to contain_File_line('upload_max_filesize') }
-          it { is_expected.to contain_File_line('phpapache2-libsodium') }
-          it { is_expected.to contain_File_line('phpapache2-redis') }
-          it { is_expected.to contain_File_line('phpcli-libsodium') }
-          it { is_expected.to contain_File_line('session-save-handler') }
-          it { is_expected.to contain_File_line('session-save-path') }
 
           it { is_expected.to contain_group('notarisdossier') }
           it { is_expected.to contain_user('notarisdossier') }

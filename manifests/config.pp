@@ -10,50 +10,53 @@ class profile_apache::config {
 
   notice ("client_server_name is: ${::profile_apache::client_server_name}")
 
-  # php settings
-  file_line { 'phpcli-libsodium':
-    ensure             => 'present',
-    after              => 'PHP\'s initialization file',
-    path               => '/etc/php5/cli/php.ini',
-    line               => 'extension=libsodium.so',
-    append_on_no_match => false,
-  }
+  if $::operatingsystemrelease != '16.04' {
 
-  file_line { 'phpapache2-libsodium':
-    ensure             => 'present',
-    after              => 'PHP\'s initialization file',
-    path               => '/etc/php5/apache2/php.ini',
-    line               => 'extension=libsodium.so',
-    append_on_no_match => false,
-  }
+    # php settings
+    file_line { 'phpcli-libsodium':
+      ensure             => 'present',
+      after              => 'PHP\'s initialization file',
+      path               => '/etc/php5/cli/php.ini',
+      line               => 'extension=libsodium.so',
+      append_on_no_match => false,
+    }
 
-  file_line { 'phpapache2-redis':
-    ensure             => 'present',
-    after              => 'PHP\'s initialization file',
-    path               => '/etc/php5/apache2/php.ini',
-    line               => 'extension=redis.so',
-    append_on_no_match => false,
-  }
+    file_line { 'phpapache2-libsodium':
+      ensure             => 'present',
+      after              => 'PHP\'s initialization file',
+      path               => '/etc/php5/apache2/php.ini',
+      line               => 'extension=libsodium.so',
+      append_on_no_match => false,
+    }
 
-  file_line { 'session-save-handler':
-    ensure => present,
-    path   => '/etc/php5/apache2/php.ini',
-    line   => 'session.save_handler = redis',
-    match  => '^session.save_handler = files',
-  }
+    file_line { 'phpapache2-redis':
+      ensure             => 'present',
+      after              => 'PHP\'s initialization file',
+      path               => '/etc/php5/apache2/php.ini',
+      line               => 'extension=redis.so',
+      append_on_no_match => false,
+    }
 
-  file_line { 'session-save-path':
-    ensure => present,
-    path   => '/etc/php5/apache2/php.ini',
-    line   => 'session.save_path = tcp://172.0.20.101:6379',
-    match  => '^;session.save_path',
-  }
+    file_line { 'session-save-handler':
+      ensure => present,
+      path   => '/etc/php5/apache2/php.ini',
+      line   => 'session.save_handler = redis',
+      match  => '^session.save_handler = files',
+    }
 
-  file_line { 'upload_max_filesize':
-    ensure => present,
-    path   => '/etc/php5/apache2/php.ini',
-    line   => 'upload_max_filesize = 16M',
-    match  => '^upload_max_filesize = 2M',
+    file_line { 'session-save-path':
+      ensure => present,
+      path   => '/etc/php5/apache2/php.ini',
+      line   => 'session.save_path = tcp://172.0.20.101:6379',
+      match  => '^;session.save_path',
+    }
+
+    file_line { 'upload_max_filesize':
+      ensure => present,
+      path   => '/etc/php5/apache2/php.ini',
+      line   => 'upload_max_filesize = 16M',
+      match  => '^upload_max_filesize = 2M',
+    }
   }
 
   # create group
