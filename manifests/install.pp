@@ -165,5 +165,6 @@ class profile_apache::install {
     command => 'pecl install redis',
     cwd     => '/',
     creates => '/usr/share/php/doc/redis/README.markdown',
+    require => Package['php-pear'],
   }
 }
