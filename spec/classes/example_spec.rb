@@ -59,6 +59,7 @@ describe 'profile_apache' do
             it { is_expected.to contain_package('php5-dev') }
             it { is_expected.to contain_package('redis-tools') }
           end
+          it { is_expected.to contain_package('openssl').with( 'ensure' => 'latest' ) }
           it { is_expected.to contain_file('/home/notarisdossier/.ssh/authorized_keys') }
           it { is_expected.to contain_file('/home/notarisdossier/.ssh') }
           it { is_expected.to contain_file('/home/notarisdossier/application/current') }

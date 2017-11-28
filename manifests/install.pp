@@ -32,6 +32,11 @@ class profile_apache::install {
   # install packages
   ensure_packages( $::profile_apache::packages )
 
+  package { 'openssl':
+    ensure  => latest,
+    require => Exec['apt_update'],
+  }
+
   # install zend framework
   exec { "wget-${zendurl}":
     command => "wget --no-check-certificate ${zendurl} -O ${zenddestination}",
