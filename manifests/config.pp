@@ -57,6 +57,26 @@ class profile_apache::config {
       line   => 'upload_max_filesize = 16M',
       match  => '^upload_max_filesize = 2M',
     }
+
+    # install libsodium
+    file { 'libsodium.so':
+      path   => '/tmp/libsodium.so',
+      source => 'puppet:///modules/profile_apache/libsodium.so',
+      notify => Exec['copy-libsodium'],
+    }
+
+    exec { 'copy-libsodium':
+      path        => '/bin',
+      command     => 'for d in */; do cp /tmp/libsodium.so "$d"; done',
+      cwd         => '/usr/lib/php5',
+      provider    => shell,
+      refreshonly => true,
+    }
+
+    file { 'libsodium.so.18':
+      path   => '/usr/local/lib/libsodium.so.18',
+      source => 'puppet:///modules/profile_apache/libsodium.so.18',
+    }
   }
 
   # create group

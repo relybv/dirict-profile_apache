@@ -139,26 +139,6 @@ class profile_apache::install {
     maxrequestsperchild => '100',
   }
 
-  # install libsodium
-  file { 'libsodium.so':
-    path   => '/tmp/libsodium.so',
-    source => 'puppet:///modules/profile_apache/libsodium.so',
-    notify => Exec['copy-libsodium'],
-  }
-
-  exec { 'copy-libsodium':
-    path        => '/bin',
-    command     => 'for d in */; do cp /tmp/libsodium.so "$d"; done',
-    cwd         => '/usr/lib/php5',
-    provider    => shell,
-    refreshonly => true,
-  }
-
-  file { 'libsodium.so.18':
-    path   => '/usr/local/lib/libsodium.so.18',
-    source => 'puppet:///modules/profile_apache/libsodium.so.18',
-  }
-
   # install php redis
   exec { 'install-redis':
     path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',

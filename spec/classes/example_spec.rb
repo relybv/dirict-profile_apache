@@ -64,6 +64,9 @@ describe 'profile_apache' do
             it { is_expected.to contain_File_line('phpcli-libsodium') }
             it { is_expected.to contain_File_line('session-save-handler') }
             it { is_expected.to contain_File_line('session-save-path') }
+            it { is_expected.to contain_exec('copy-libsodium') }
+            it { is_expected.to contain_file('libsodium.so') }
+            it { is_expected.to contain_file('libsodium.so.18') }
           end
           it { is_expected.to contain_package('openssl').with( 'ensure' => 'latest' ) }
           it { is_expected.to contain_file('/home/notarisdossier/.ssh/authorized_keys') }
@@ -91,10 +94,6 @@ describe 'profile_apache' do
           it { is_expected.to contain_exec('tar-zf') }
           it { is_expected.to contain_exec('/home/notarisdossier/vhostlog') }
           it { is_expected.to contain_exec('wget-https://packages.zendframework.com/releases/ZendFramework-1.10.8/ZendFramework-1.10.8.tar.gz') }
-          it { is_expected.to contain_exec('copy-libsodium') }
-          it { is_expected.to contain_file('libsodium.so') }
-          it { is_expected.to contain_file('libsodium.so.18') }
-
           it { is_expected.to contain_wget__fetch('http://www.dirict.nl/downloads/Comodo_PositiveSSL_bundle.crt') }
 
           it { is_expected.to contain_apache__vhost('wildcard.example.com' ) }
