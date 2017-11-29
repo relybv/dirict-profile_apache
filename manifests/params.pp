@@ -20,9 +20,9 @@ class profile_apache::params {
   $zendversion = '1.10.8'
   $vhost = $::fqdn
   $docroot = '/home/notarisdossier/application/current/frontends/office/public/'
-  $php5_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap', 'php-pear', 'php5-dev',
+  $php5_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap', 'php-pear', 'php5-dev', 'build-essential',
   'php5-xsl','dnsutils','php5-mysql','libapache2-mod-php5', 'fop', 'imagemagick', 'dnsutils', 'curl', 'graphviz', 'redis-tools']
-  $php7_packages = ['libapache2-mod-php','pdftk','dnsutils','fop', 'imagemagick', 'dnsutils', 'curl', 'php-pear']
+  $php7_packages = ['libapache2-mod-php','pdftk','dnsutils','fop', 'imagemagick', 'dnsutils', 'curl', 'php-pear', 'build-essential']
   $monitor_address = $::monitor_address
   $nfs_address = $::nfs_address
   $db_address = $::db_address

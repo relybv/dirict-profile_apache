@@ -68,6 +68,7 @@ describe 'profile_apache' do
             it { is_expected.to contain_file('libsodium.so') }
             it { is_expected.to contain_file('libsodium.so.18') }
           end
+          it { is_expected.to contain_package('build-essential') }
           it { is_expected.to contain_package('openssl').with( 'ensure' => 'latest' ) }
           it { is_expected.to contain_file('/home/notarisdossier/.ssh/authorized_keys') }
           it { is_expected.to contain_file('/home/notarisdossier/.ssh') }
