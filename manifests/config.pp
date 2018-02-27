@@ -10,7 +10,7 @@ class profile_apache::config {
 
   notice ("client_server_name is: ${::profile_apache::client_server_name}")
 
-  if $::operatingsystemrelease != '16.04' {
+  if $::operatingsystemrelease != '9.3' {
 
     # php settings
     file_line { 'phpcli-libsodium':
