@@ -30,7 +30,9 @@ class profile_apache::install {
   }
 
   # install packages
-  ensure_packages( $::profile_apache::packages )
+  ensure_packages( $::profile_apache::packages, {
+    'require' => Apt::Source['php'],
+  })
 
   package { 'openssl':
     ensure  => latest,
