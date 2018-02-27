@@ -20,7 +20,7 @@ class profile_apache::install {
   apt::source { 'php':
     location => $::profile_apache::params::php_repo_location,
     release  => $::profile_apache::params::php_repo_release,
-    repos    => 'all',
+    repos    => 'main',
     key      => {
       'id'     => $::profile_apache::params::php_repo_id,
       'source' => $::profile_apache::params::php_repo_source,
