@@ -146,7 +146,7 @@ class profile_apache::install {
     path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
     command => 'pecl install redis',
     cwd     => '/',
-    creates => '/usr/share/php/doc/redis/README.markdown',
+    creates => '/usr/share/php/docs/redis/README.markdown',
     require => Package['php-pear'],
   }
 }
