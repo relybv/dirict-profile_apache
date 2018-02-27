@@ -25,7 +25,7 @@ class profile_apache::install {
       'id'     => $::profile_apache::params::php_repo_id,
       'source' => $::profile_apache::params::php_repo_source,
     },
-    before   => Package['php-pear'],
+    before   => Package['pdftk'],
     notify   => Exec['apt_update'],
   }
 
