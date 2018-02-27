@@ -149,4 +149,14 @@ class profile_apache::install {
     creates => '/usr/share/php/docs/redis/README.markdown',
     require => Package['php-pear'],
   }
+
+  # install libsodium
+  exec { 'install-libsodium':
+    path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
+    command => 'pecl install -f libsodium',
+    cwd     => '/',
+    creates => '/usr/share/php/docs/redis/README.markdown',
+    require => Package['php-pear'],
+  }
+
 }
