@@ -120,12 +120,12 @@ class profile_apache::install {
     keepalive              => 'On',
     max_keepalive_requests => '250',
     require                => Exec[ $logpath ],
-    default_mods           => [
+#    default_mods           => [
 #      'php',
-      'headers',
-      'rewrite',
-      'expires',
-    ],
+#      'headers',
+#      'rewrite',
+#      'expires',
+#    ],
   }
 
   class { 'apache::mod::ssl':
