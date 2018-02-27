@@ -22,7 +22,7 @@ class profile_apache::params {
   $docroot = '/home/notarisdossier/application/current/frontends/office/public/'
   $php5_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap', 'php-pear', 'php5-dev', 'build-essential',
   'php5-xsl','dnsutils','php5-mysql','libapache2-mod-php5', 'fop', 'imagemagick', 'dnsutils', 'curl', 'graphviz', 'redis-tools']
-  $php7_packages = ['php7.1-common', 'pdftk','dnsutils','fop', 'imagemagick', 'dnsutils', 'curl', 'php-pear', 'build-essential', 'php7.1-dev']
+  $php7_packages = ['php7.1-common', 'pdftk','dnsutils','fop', 'imagemagick', 'dnsutils', 'curl', 'php-pear', 'build-essential', 'php7.1-dev', 'libapache2-mod-php7.1']
   $monitor_address = $::monitor_address
   $nfs_address = $::nfs_address
   $db_address = $::db_address
