@@ -48,7 +48,7 @@ class profile_apache::params {
 
   case $::osfamily {
     'Debian': {
-      if $::operatingsystemrelease == '9' {
+      if $::operatingsystemrelease == '9.3' {
         $packages = $php7_packages
         $php_repo_location = 'https://packages.sury.org/php'
         $php_repo_release = 'stretch'
