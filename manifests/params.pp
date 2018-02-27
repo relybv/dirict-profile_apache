@@ -50,10 +50,10 @@ class profile_apache::params {
     'Debian': {
       if $::operatingsystemrelease == '9' {
         $packages = $php7_packages
-        $php_repo_location = ''
-        $php_repo_release = ''
-        $php_repo_id = ''
-        $php_repo_source = ''
+        $php_repo_location = 'https://packages.sury.org/php'
+        $php_repo_release = 'stretch'
+        $php_repo_id = 'DF3D585DB8F0EB658690A554AC0E47584A7A714D'
+        $php_repo_source = 'https://packages.sury.org/php/apt.gpg'
       } else {
         $packages = $php5_packages
         $php_repo_location = 'http://packages.dotdeb.org'

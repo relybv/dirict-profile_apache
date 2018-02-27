@@ -30,7 +30,7 @@ describe 'profile_apache' do
           it { is_expected.to contain_class('apache') }
 
           case facts[:operatingsystemrelease]
-          when '16.04'
+          when '9'
             it { is_expected.to contain_package('libapache2-mod-php') }
             it { is_expected.to contain_package('pdftk') }
             it { is_expected.to contain_package('fop') }
