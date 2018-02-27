@@ -121,7 +121,7 @@ class profile_apache::install {
     max_keepalive_requests => '250',
     require                => Exec[ $logpath ],
     default_mods           => [
-      'php',
+#      'php',
       'headers',
       'rewrite',
       'expires',
