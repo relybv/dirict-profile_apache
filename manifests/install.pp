@@ -16,14 +16,14 @@ class profile_apache::install {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  # add php5.6 repo
-  apt::source { 'php56':
-    location => 'http://packages.dotdeb.org',
-    release  => 'wheezy-php56',
+  # add php repo
+  apt::source { 'php':
+    location => $::profile_apache::params::php_repo_location,
+    release  => $::profile_apache::params::php_repo_release,
     repos    => 'all',
     key      => {
-      'id'     => '7E3F070089DF5277',
-      'source' => 'http://www.dotdeb.org/dotdeb.gpg',
+      'id'     => $::profile_apache::params::php_repo_id,
+      'source' => $::profile_apache::params::php_repo_source,
     },
     before   => Package['php-pear'],
     notify   => Exec['apt_update'],

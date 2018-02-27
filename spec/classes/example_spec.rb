@@ -38,7 +38,7 @@ describe 'profile_apache' do
             it { is_expected.to contain_package('imagemagick') }
             it { is_expected.to contain_package('curl') }
           else
-            it { is_expected.to contain_apt__source('php56') }
+            it { is_expected.to contain_apt__source('php') }
             it { is_expected.to contain_package('php5-common') }
             it { is_expected.to contain_package('php5-cli') }
             it { is_expected.to contain_package('php5-mcrypt') }

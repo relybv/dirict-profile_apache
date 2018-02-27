@@ -48,10 +48,18 @@ class profile_apache::params {
 
   case $::osfamily {
     'Debian': {
-      if $::operatingsystemrelease == '16.04' {
+      if $::operatingsystemrelease == '9' {
         $packages = $php7_packages
+        $php_repo_location = ''
+        $php_repo_release = ''
+        $php_repo_id = ''
+        $php_repo_source = ''
       } else {
         $packages = $php5_packages
+        $php_repo_location = 'http://packages.dotdeb.org'
+        $php_repo_release = 'wheezy-php56'
+        $php_repo_id = '7E3F070089DF5277'
+        $php_repo_source = 'http://www.dotdeb.org/dotdeb.gpg'
       }
     }
     'RedHat', 'Amazon': {
