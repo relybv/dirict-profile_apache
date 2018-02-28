@@ -155,7 +155,7 @@ class profile_apache::install {
     path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
     command => 'pecl install -f libsodium',
     cwd     => '/',
-    creates => '/usr/share/php/docs/redis/README.markdown',
+    creates => '/usr/lib/php/20160303/sodium.so',
     require => Package['php-pear'],
   }
 
