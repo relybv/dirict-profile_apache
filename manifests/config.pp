@@ -11,7 +11,6 @@ class profile_apache::config {
   notice ("client_server_name is: ${::profile_apache::client_server_name}")
 
   if $::operatingsystemrelease != '9.3' {
-
     # php settings
     file_line { 'phpcli-libsodium':
       ensure             => 'present',
@@ -20,7 +19,6 @@ class profile_apache::config {
       line               => 'extension=libsodium.so',
       append_on_no_match => false,
     }
-
     file_line { 'phpapache2-libsodium':
       ensure             => 'present',
       after              => 'PHP\'s initialization file',
@@ -28,7 +26,6 @@ class profile_apache::config {
       line               => 'extension=libsodium.so',
       append_on_no_match => false,
     }
-
     file_line { 'phpapache2-redis':
       ensure             => 'present',
       after              => 'PHP\'s initialization file',
@@ -36,35 +33,30 @@ class profile_apache::config {
       line               => 'extension=redis.so',
       append_on_no_match => false,
     }
-
     file_line { 'session-save-handler':
       ensure => present,
       path   => '/etc/php5/apache2/php.ini',
       line   => 'session.save_handler = redis',
       match  => '^session.save_handler = files',
     }
-
     file_line { 'session-save-path':
       ensure => present,
       path   => '/etc/php5/apache2/php.ini',
       line   => 'session.save_path = tcp://172.0.20.101:6379',
       match  => '^;session.save_path',
     }
-
     file_line { 'upload_max_filesize':
       ensure => present,
       path   => '/etc/php5/apache2/php.ini',
       line   => 'upload_max_filesize = 16M',
       match  => '^upload_max_filesize = 2M',
     }
-
     # install libsodium
     file { 'libsodium.so':
       path   => '/tmp/libsodium.so',
       source => 'puppet:///modules/profile_apache/libsodium.so',
       notify => Exec['copy-libsodium'],
     }
-
     exec { 'copy-libsodium':
       path        => '/bin',
       command     => 'for d in */; do cp /tmp/libsodium.so "$d"; done',
@@ -72,10 +64,50 @@ class profile_apache::config {
       provider    => shell,
       refreshonly => true,
     }
-
     file { 'libsodium.so.18':
       path   => '/usr/local/lib/libsodium.so.18',
       source => 'puppet:///modules/profile_apache/libsodium.so.18',
+    }
+  } else {
+    # php settings
+    file_line { 'phpcli-libsodium':
+      ensure             => 'present',
+      after              => 'PHP\'s initialization file',
+      path               => '/etc/php/7.1/cli/php.ini',
+      line               => 'extension=libsodium.so',
+      append_on_no_match => false,
+    }
+    file_line { 'phpapache2-libsodium':
+      ensure             => 'present',
+      after              => 'PHP\'s initialization file',
+      path               => '/etc/php/7.1/apache2/php.ini',
+      line               => 'extension=libsodium.so',
+      append_on_no_match => false,
+    }
+    file_line { 'phpapache2-redis':
+      ensure             => 'present',
+      after              => 'PHP\'s initialization file',
+      path               => '/etc/php/7.1/apache2/php.ini',
+      line               => 'extension=redis.so',
+      append_on_no_match => false,
+    }
+    file_line { 'session-save-handler':
+      ensure => present,
+      path   => '/etc/php/7.1//apache2/php.ini',
+      line   => 'session.save_handler = redis',
+      match  => '^session.save_handler = files',
+    }
+    file_line { 'session-save-path':
+      ensure => present,
+      path   => '/etc/php/7.1/apache2/php.ini',
+      line   => 'session.save_path = tcp://172.0.20.101:6379',
+      match  => '^;session.save_path',
+    }
+    file_line { 'upload_max_filesize':
+      ensure => present,
+      path   => '/etc/php/7.1//apache2/php.ini',
+      line   => 'upload_max_filesize = 16M',
+      match  => '^upload_max_filesize = 2M',
     }
   }
 
