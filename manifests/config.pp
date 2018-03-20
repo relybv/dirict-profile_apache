@@ -70,20 +70,6 @@ class profile_apache::config {
     }
   } else {
     # php settings
-    file_line { 'phpcli-libsodium':
-      ensure             => 'present',
-      after              => 'PHP\'s initialization file',
-      path               => '/etc/php/7.1/cli/php.ini',
-      line               => 'extension=libsodium.so',
-      append_on_no_match => false,
-    }
-    file_line { 'phpapache2-libsodium':
-      ensure             => 'present',
-      after              => 'PHP\'s initialization file',
-      path               => '/etc/php/7.1/apache2/php.ini',
-      line               => 'extension=libsodium.so',
-      append_on_no_match => false,
-    }
     file_line { 'phpapache2-redis':
       ensure             => 'present',
       after              => 'PHP\'s initialization file',
