@@ -150,13 +150,15 @@ class profile_apache::install {
     require => Package['php-pear'],
   }
 
-  # install libsodium
-  exec { 'install-libsodium':
-    path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
-    command => 'pecl install -f libsodium',
-    cwd     => '/',
-    creates => '/usr/lib/php/20160303/sodium.so',
-    require => Package['php-pear'],
+  if $::operatingsystemrelease != '9.3' {
+    # install libsodium
+    exec { 'install-libsodium':
+      path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
+      command => 'pecl install -f libsodium',
+      cwd     => '/',
+      creates => '/usr/lib/php/20160303/sodium.so',
+      require => Package['php-pear'],
+    }
   }
 
 }

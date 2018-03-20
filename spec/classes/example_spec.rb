@@ -64,6 +64,7 @@ describe 'profile_apache' do
             it { is_expected.to contain_File_line('phpcli-libsodium') }
             it { is_expected.to contain_File_line('session-save-handler') }
             it { is_expected.to contain_File_line('session-save-path') }
+            it { is_expected.to contain_exec('install-libsodium') }
             it { is_expected.to contain_exec('copy-libsodium') }
             it { is_expected.to contain_file('libsodium.so') }
             it { is_expected.to contain_file('libsodium.so.18') }
