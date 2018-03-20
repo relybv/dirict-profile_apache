@@ -21,7 +21,6 @@ describe 'profile_apache' do
           let(:params) {{ }}
 
           it { is_expected.to compile.with_all_deps }
-
           it { is_expected.to contain_class('profile_apache') }
           it { is_expected.to contain_class('profile_apache::install') }
           it { is_expected.to contain_class('profile_apache::config') }
@@ -37,6 +36,16 @@ describe 'profile_apache' do
             it { is_expected.to contain_package('dnsutils') }
             it { is_expected.to contain_package('imagemagick') }
             it { is_expected.to contain_package('curl') }
+            it { is_expected.to contain_package('php7.1-bz2') }
+            it { is_expected.to contain_package('php7.1-curl') }
+            it { is_expected.to contain_package('php7.1-gd') }
+            it { is_expected.to contain_package('php7.1-imagick') }
+            it { is_expected.to contain_package('php7.1-imap') }
+            it { is_expected.to contain_package('php-sodium') }
+            it { is_expected.to contain_package('php7.1-mbstring') }
+            it { is_expected.to contain_package('php7.1-mcrypt') }
+            it { is_expected.to contain_package('php7.1-soap') }
+            it { is_expected.to contain_package('php7.1-zip') }
           else
             it { is_expected.to contain_apt__source('php') }
             it { is_expected.to contain_package('php5-common') }
