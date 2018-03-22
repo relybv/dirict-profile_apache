@@ -24,6 +24,36 @@ class profile_apache::config {
     line   => '  StartServers        10',
     match  => '^ *StartServers *[0-9]*',
   }
+  file_line { 'minspareservers':
+    ensure => present,
+    path   => '/etc/apache2/mods-enabled/prefork.conf',
+    line   => '  MinSpareServers        10',
+    match  => '^ *MinSpareServers *[0-9]*',
+  }
+  file_line { 'maxspareservers':
+    ensure => present,
+    path   => '/etc/apache2/mods-enabled/prefork.conf',
+    line   => '  MaxSpareServers        10',
+    match  => '^ *MaxSpareServers *[0-9]*',
+  }
+  file_line { 'serverlimit':
+    ensure => present,
+    path   => '/etc/apache2/mods-enabled/prefork.conf',
+    line   => '  ServerLimit        256',
+    match  => '^ *ServerLimit *[0-9]*',
+  }
+  file_line { 'maxclients':
+    ensure => present,
+    path   => '/etc/apache2/mods-enabled/prefork.conf',
+    line   => '  MaxClients        256',
+    match  => '^ *MaxClients *[0-9]*',
+  }
+  file_line { 'maxrequestsperchild':
+    ensure => present,
+    path   => '/etc/apache2/mods-enabled/prefork.conf',
+    line   => '  MaxRequestsPerChild        100',
+    match  => '^ *MaxRequestsPerChild *[0-9]*',
+  }
 
   case $::profile_apache::params::phpversion {
     '5.0': {
