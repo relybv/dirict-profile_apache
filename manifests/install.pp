@@ -139,7 +139,7 @@ class profile_apache::install {
   class { 'apache::mod::expires': }
 
   exec { 'enable_php':
-    command => "/usr/sbin/a2enmod php${::profile_apache::params::php_version}",
+    command => "/usr/sbin/a2enmod php${::profile_apache::params::phpversion}",
   }
 
   class { 'apache::mod::ssl':
