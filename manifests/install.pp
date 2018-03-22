@@ -140,7 +140,6 @@ class profile_apache::install {
 
   exec { 'enable_php':
     command => "/usr/sbin/a2enmod php${::profile_apache::params::php_version}",
-    require => Class['apache'],
   }
 
   class { 'apache::mod::ssl':
