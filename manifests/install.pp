@@ -67,7 +67,7 @@ class profile_apache::install {
   }
 
   exec { 'mv-zf':
-    command     => "/bin/mv /tmp/ZendFramework-${zendversion}/library/Zend /usr/share/php/",
+    command     => "/bin/mv /tmp/ZendFramework-${zendversion}/library/Zend /usr/share/php/.",
     refreshonly => true,
   }
 
