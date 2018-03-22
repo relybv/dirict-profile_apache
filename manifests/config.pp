@@ -10,14 +10,25 @@ class profile_apache::config {
 
   notice ("client_server_name is: ${::profile_apache::client_server_name}")
 
-  exec { 'enable_php':
-    command => "/usr/sbin/a2enmod php${::profile_apache::params::phpversion}",
+#  class { 'apache::mod::prefork':
+#    startservers        => '10',
+#    minspareservers     => '10',
+#    maxspareservers     => '20',
+#    serverlimit         => '256',
+#    maxclients          => '256',
+#    maxrequestsperchild => '100',
+#  }
+  file_line { 'startservers':
+    ensure => present,
+    path   => '/etc/apache2/mods-enabled/prefork.conf',
+    line   => '  StartServers        10',
+    match  => '^ *StartServers *[0-9]*',
   }
 
   case $::profile_apache::params::phpversion {
     '5.0': {
     # php settings
-        file_line { 'phpcli-libsodium':
+      file_line { 'phpcli-libsodium':
         after              => 'PHP\'s initialization file',
         path               => '/etc/php5/cli/php.ini',
         line               => 'extension=libsodium.so',

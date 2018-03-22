@@ -125,7 +125,7 @@ class profile_apache::install {
 
   class { 'apache':
     default_vhost          => false,
-    mpm_module             => false,
+    mpm_module             => 'prefork',
     root_directory_options => $::profile_apache::root_directory_options,
     log_level              => $::profile_apache::log_level,
     log_formats            => {
@@ -142,18 +142,10 @@ class profile_apache::install {
   class { 'apache::mod::headers': }
   class { 'apache::mod::rewrite': }
   class { 'apache::mod::expires': }
+  include apache::mod::php
 
   class { 'apache::mod::ssl':
     ssl_compression => false,
-  }
-
-  class { 'apache::mod::prefork':
-    startservers        => '10',
-    minspareservers     => '10',
-    maxspareservers     => '20',
-    serverlimit         => '256',
-    maxclients          => '256',
-    maxrequestsperchild => '100',
   }
 
   if $::operatingsystemrelease != '9.3' {
