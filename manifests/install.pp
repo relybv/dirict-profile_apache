@@ -66,9 +66,14 @@ class profile_apache::install {
     notify      => Exec[ 'mv-zf' ],
   }
 
+  file { '/usr/share/php':
+    ensure => directory,
+  }
+
   exec { 'mv-zf':
     command     => "/bin/mv /tmp/ZendFramework-${zendversion}/library/Zend /usr/share/php/.",
     refreshonly => true,
+    require     => File['/usr/share/php'],
   }
 
   # create logpath
