@@ -10,6 +10,10 @@ class profile_apache::config {
 
   notice ("client_server_name is: ${::profile_apache::client_server_name}")
 
+  exec { 'enable_php':
+    command => "/usr/sbin/a2enmod php${::profile_apache::params::phpversion}",
+  }
+
   case $::profile_apache::params::phpversion {
     '5.0': {
     # php settings

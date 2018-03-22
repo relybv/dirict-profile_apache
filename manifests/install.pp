@@ -138,10 +138,6 @@ class profile_apache::install {
   class { 'apache::mod::rewrite': }
   class { 'apache::mod::expires': }
 
-  exec { 'enable_php':
-    command => "/usr/sbin/a2enmod php${::profile_apache::params::phpversion}",
-  }
-
   class { 'apache::mod::ssl':
     ssl_compression => false,
   }
