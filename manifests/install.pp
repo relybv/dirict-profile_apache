@@ -137,6 +137,7 @@ class profile_apache::install {
   class { 'apache::mod::headers': }
   class { 'apache::mod::rewrite': }
   class { 'apache::mod::expires': }
+  class { 'apache::mod::php': }
 
   class { 'apache::mod::ssl':
     ssl_compression => false,
