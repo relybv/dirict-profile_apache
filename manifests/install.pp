@@ -138,7 +138,8 @@ class profile_apache::install {
   class { 'apache::mod::rewrite': }
   class { 'apache::mod::expires': }
 
-  exec { "/usr/sbin/a2enmod php${::profile_apache::params::php_version}":
+  exec { 'enable_php':
+    command => "/usr/sbin/a2enmod php${::profile_apache::params::php_version}",
     require => Class['apache'],
   }
 
