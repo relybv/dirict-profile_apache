@@ -147,6 +147,14 @@ class profile_apache::config {
   $ssh_keys = hiera('ssh_keys', {} )
   create_resources('profile_apache::notarisdossier_user_keys', $ssh_keys)
 
+  file { '/home/notarisdossier/.ssh/id_rsa.pub':
+    ensure  => present,
+    content => $::profile_apache::deploy_key,
+    owner   => 'notarisdossier',
+    group   => 'notarisdossier',
+    mode    => '0600',
+    require => File['/home/notarisdossier/.ssh'],
+  }
   file { '/home/notarisdossier/.ssh/authorized_keys':
     ensure  => present,
     owner   => 'notarisdossier',

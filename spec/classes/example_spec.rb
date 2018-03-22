@@ -28,49 +28,6 @@ describe 'profile_apache' do
           it { is_expected.to contain_class('profile_apache::service') }
           it { is_expected.to contain_class('apache') }
 
-          case facts[:operatingsystemrelease]
-          when '9'
-            it { is_expected.to contain_package('libapache2-mod-php') }
-            it { is_expected.to contain_package('pdftk') }
-            it { is_expected.to contain_package('fop') }
-            it { is_expected.to contain_package('dnsutils') }
-            it { is_expected.to contain_package('imagemagick') }
-            it { is_expected.to contain_package('curl') }
-            it { is_expected.to contain_package('php7.1-bz2') }
-            it { is_expected.to contain_package('php7.1-curl') }
-            it { is_expected.to contain_package('php7.1-gd') }
-            it { is_expected.to contain_package('php7.1-imagick') }
-            it { is_expected.to contain_package('php7.1-imap') }
-            it { is_expected.to contain_package('php-sodium') }
-            it { is_expected.to contain_package('php7.1-mbstring') }
-            it { is_expected.to contain_package('php7.1-mcrypt') }
-            it { is_expected.to contain_package('php7.1-soap') }
-            it { is_expected.to contain_package('php7.1-zip') }
-          else
-            it { is_expected.to contain_package('php5-common') }
-            it { is_expected.to contain_package('php5-cli') }
-            it { is_expected.to contain_package('php5-mcrypt') }
-            it { is_expected.to contain_package('php5-imagick') }
-            it { is_expected.to contain_package('php5-curl') }
-            it { is_expected.to contain_package('php5-gd') }
-            it { is_expected.to contain_package('php5-imap') }
-            it { is_expected.to contain_package('php5-xsl') }
-            it { is_expected.to contain_package('php5-mysql') }
-            it { is_expected.to contain_package('libapache2-mod-php5') }
-            it { is_expected.to contain_package('pdftk') }
-            it { is_expected.to contain_package('fop') }
-            it { is_expected.to contain_package('dnsutils') }
-            it { is_expected.to contain_package('imagemagick') }
-            it { is_expected.to contain_package('curl') }
-            it { is_expected.to contain_package('graphviz') }
-            it { is_expected.to contain_package('php-pear') }
-            it { is_expected.to contain_package('php5-dev') }
-            it { is_expected.to contain_package('redis-tools') }
-            it { is_expected.to contain_File_line('upload_max_filesize') }
-            it { is_expected.to contain_File_line('session-save-handler') }
-            it { is_expected.to contain_File_line('session-save-path') }
-            it { is_expected.to contain_exec('install-libsodium') }
-          end
           it { is_expected.to contain_package('build-essential') }
           it { is_expected.to contain_package('openssl').with( 'ensure' => 'latest' ) }
           it { is_expected.to contain_file('/home/notarisdossier/.ssh/authorized_keys') }

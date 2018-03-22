@@ -26,11 +26,11 @@ class profile_apache::params {
   'graphviz','redis-tools','poppler-utils']
   $php70_packages = ['php','libapache2-mod-php','mysql-client','php-bz2','php-cli','php-curl','php-gd','php-imagick','php-imap',
   'php-libsodium','php-mbstring','php-mcrypt','php-mysql','php-soap','php-xml','php-zip','pdftk','graphviz','fop','imagemagick',
-  'php-redis','redis-tools,'poppler-utils'']
+  'php-redis','redis-tools','poppler-utils']
   $php71_packages = ['php7.1','php7.1-fpm','php7.1-common','php7.1-cli','pdftk','dnsutils','fop','imagemagick','dnsutils','curl',
   'php-pear','build-essential','php7.1-dev','php7.1-xml','libsodium-dev','php7.1-bz2','php7.1-curl','php7.1-gd','php-imagick',
   'php7.1-imap','php-sodium','php7.1-mbstring','php7.1-mcrypt','php7.1-soap','php7.1-zip','php7.1-mysql','mysql-client','php-redis',
-  'redis-tools,'poppler-utils'']
+  'redis-tools','poppler-utils']
   $monitor_address = $::monitor_address
   $nfs_address = $::nfs_address
   $db_address = $::db_address
@@ -45,6 +45,7 @@ class profile_apache::params {
   $ssl_cert = undef
   $ssl_key = undef
   $ext_lb_fqdn = $::ext_lb_fqdn
+  $deploy_key = hiera('deploy_key', 'ssh-rsa')
   $db_password = hiera('db_password', 'welkom01')
   $dirict_username = 'dirict'
   $dirict_password = 'welkom01'

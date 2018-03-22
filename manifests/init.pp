@@ -27,6 +27,8 @@ class profile_apache
   # certificates
   $ssl_cert = $::profile_apache::params::ssl_cert,
   $ssl_key =  $::profile_apache::params::ssl_key,
+  # deploy keys
+  $deploy_key = $::profile_apache::params::deploy_key,
   # vhost office
   $office_server_name = $::profile_apache::params::office_server_name,
   $office_document_root = $::profile_apache::params::office_document_root,
