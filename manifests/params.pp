@@ -18,11 +18,19 @@ class profile_apache::params {
 
 
   $zendversion = '1.10.8'
+  $phpversion = '7.0' # change to 5.0 / 7.0 7.1
   $vhost = $::fqdn
   $docroot = '/home/notarisdossier/application/current/frontends/office/public/'
-  $php5_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap', 'php-pear', 'php5-dev', 'build-essential',
-  'php5-xsl','dnsutils','php5-mysql','libapache2-mod-php5', 'fop', 'imagemagick', 'dnsutils', 'curl', 'graphviz', 'redis-tools']
-  $php7_packages = ['php7.1','php7.1-fpm','php7.1-common','php7.1-cli', 'pdftk','dnsutils','fop', 'imagemagick', 'dnsutils', 'curl', 'php-pear', 'build-essential', 'php7.1-dev', 'php7.1-xml','libsodium-dev','php7.1-bz2','php7.1-curl','php7.1-gd','php-imagick','php7.1-imap','php-sodium','php7.1-mbstring','php7.1-mcrypt','php7.1-soap','php7.1-zip','php7.1-mysql','mysql-client']
+  $php5_packages = ['pdftk','php5-common','php5-cli','php5-mcrypt','php5-imagick','php5-curl','php5-gd','php5-imap','php-pear',
+  'php5-dev','build-essential','php5-xsl','dnsutils','php5-mysql','libapache2-mod-php5','fop','imagemagick','dnsutils','curl',
+  'graphviz', 'redis-tools']
+  $php70_packages = ['php','libapache2-mod-php','mysql-client','php-bz2','php-cli','php-curl','php-gd','php-imagick','php-imap',
+  'php-libsodium','php-mbstring','php-mcrypt','php-mysql','php-soap','php-xml','php-zip','pdftk','graphviz','fop','imagemagick',
+  'php-redis','redis-tools']
+  $php71_packages = ['php7.1','php7.1-fpm','php7.1-common','php7.1-cli','pdftk','dnsutils','fop','imagemagick','dnsutils','curl',
+  'php-pear','build-essential','php7.1-dev','php7.1-xml','libsodium-dev','php7.1-bz2','php7.1-curl','php7.1-gd','php-imagick',
+  'php7.1-imap','php-sodium','php7.1-mbstring','php7.1-mcrypt','php7.1-soap','php7.1-zip','php7.1-mysql','mysql-client','php-redis',
+  'redis-tools']
   $monitor_address = $::monitor_address
   $nfs_address = $::nfs_address
   $db_address = $::db_address
@@ -49,7 +57,17 @@ class profile_apache::params {
   case $::osfamily {
     'Debian': {
       if $::operatingsystemrelease == '9.3' {
-        $packages = $php7_packages
+        case $phpversion {
+          '7.0': { $packages = $php70_packages }
+          '7.1': {
+            $packages = $php71_packages
+            $php_repo_location = 'https://packages.sury.org/php'
+            $php_repo_release = 'stretch'
+            $php_repo_id = 'DF3D585DB8F0EB658690A554AC0E47584A7A714D'
+            $php_repo_source = 'https://packages.sury.org/php/apt.gpg'
+          }
+          default: { fail("PHP version ${phpversion} on this os version not supported") }
+        }
         $php_repo_location = 'https://packages.sury.org/php'
         $php_repo_release = 'stretch'
         $php_repo_id = 'DF3D585DB8F0EB658690A554AC0E47584A7A714D'

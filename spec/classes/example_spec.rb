@@ -68,15 +68,9 @@ describe 'profile_apache' do
             it { is_expected.to contain_package('php5-dev') }
             it { is_expected.to contain_package('redis-tools') }
             it { is_expected.to contain_File_line('upload_max_filesize') }
-            it { is_expected.to contain_File_line('phpapache2-libsodium') }
-            it { is_expected.to contain_File_line('phpapache2-redis') }
-            it { is_expected.to contain_File_line('phpcli-libsodium') }
             it { is_expected.to contain_File_line('session-save-handler') }
             it { is_expected.to contain_File_line('session-save-path') }
             it { is_expected.to contain_exec('install-libsodium') }
-            it { is_expected.to contain_exec('copy-libsodium') }
-            it { is_expected.to contain_file('libsodium.so') }
-            it { is_expected.to contain_file('libsodium.so.18') }
           end
           it { is_expected.to contain_package('build-essential') }
           it { is_expected.to contain_package('openssl').with( 'ensure' => 'latest' ) }
