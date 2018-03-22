@@ -33,7 +33,7 @@ class profile_apache::config {
   file_line { 'maxspareservers':
     ensure => present,
     path   => '/etc/apache2/mods-enabled/prefork.conf',
-    line   => '  MaxSpareServers        10',
+    line   => '  MaxSpareServers        20',
     match  => '^ *MaxSpareServers *[0-9]*',
   }
   file_line { 'serverlimit':
