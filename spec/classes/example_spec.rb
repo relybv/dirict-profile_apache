@@ -47,7 +47,6 @@ describe 'profile_apache' do
             it { is_expected.to contain_package('php7.1-soap') }
             it { is_expected.to contain_package('php7.1-zip') }
           else
-            it { is_expected.to contain_apt__source('php') }
             it { is_expected.to contain_package('php5-common') }
             it { is_expected.to contain_package('php5-cli') }
             it { is_expected.to contain_package('php5-mcrypt') }
@@ -94,7 +93,6 @@ describe 'profile_apache' do
           it { is_expected.to contain_group('notarisdossier') }
           it { is_expected.to contain_user('notarisdossier') }
 
-          it { is_expected.to contain_exec('install-redis') }
           it { is_expected.to contain_exec('mv-zf') }
           it { is_expected.to contain_exec('tar-zf') }
           it { is_expected.to contain_exec('/home/notarisdossier/vhostlog') }

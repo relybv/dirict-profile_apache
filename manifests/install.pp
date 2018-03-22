@@ -16,23 +16,35 @@ class profile_apache::install {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  # add php repo
-  apt::source { 'php':
-    location => $::profile_apache::params::php_repo_location,
-    release  => $::profile_apache::params::php_repo_release,
-    repos    => 'main',
-    key      => {
-      'id'     => $::profile_apache::params::php_repo_id,
-      'source' => $::profile_apache::params::php_repo_source,
-    },
-    before   => Package['pdftk'],
-    notify   => Exec['apt_update'],
-  }
+  if ( $::profile_apache::params::phpversion == '5.0' ) or ( $::profile_apache::params::phpversion == '7.1' ) {
+    # add php repo
+    apt::source { 'php':
+      location => $::profile_apache::params::php_repo_location,
+      release  => $::profile_apache::params::php_repo_release,
+      repos    => 'main',
+      key      => {
+        'id'     => $::profile_apache::params::php_repo_id,
+        'source' => $::profile_apache::params::php_repo_source,
+      },
+      before   => Package['pdftk'],
+      notify   => Exec['apt_update'],
+    }
 
-  # install packages
-  ensure_packages( $::profile_apache::packages, {
-    'require' => Apt::Source['php'],
-  })
+    # install packages
+    ensure_packages( $::profile_apache::packages, {
+      'require' => Apt::Source['php'],
+    })
+    # install php redis
+    exec { 'install-redis':
+      path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
+      command => 'pecl install redis',
+      cwd     => '/',
+      creates => '/usr/share/php/docs/redis/README.markdown',
+      require => Package['php-pear'],
+    }
+  } else {
+    ensure_packages( $::profile_apache::packages, { })
+  }
 
   package { 'openssl':
     ensure  => latest,
@@ -120,12 +132,6 @@ class profile_apache::install {
     keepalive              => 'On',
     max_keepalive_requests => '250',
     require                => Exec[ $logpath ],
-#    default_mods           => [
-#      'php',
-#      'headers',
-#      'rewrite',
-#      'expires',
-#    ],
   }
 
   class { 'apache::mod::headers': }
@@ -143,15 +149,6 @@ class profile_apache::install {
     serverlimit         => '256',
     maxclients          => '256',
     maxrequestsperchild => '100',
-  }
-
-  # install php redis
-  exec { 'install-redis':
-    path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
-    command => 'pecl install redis',
-    cwd     => '/',
-    creates => '/usr/share/php/docs/redis/README.markdown',
-    require => Package['php-pear'],
   }
 
   if $::operatingsystemrelease != '9.3' {
