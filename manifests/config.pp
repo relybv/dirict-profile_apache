@@ -266,7 +266,7 @@ class profile_apache::config {
     custom_fragment      => 'Header set Strict-Transport-Security "max-age=31536001"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set X-XSS-Protection 1
-  Header set X-Content-Type-Options "nosniff
+  Header set X-Content-Type-Options "nosniff"
   Header unset ETag
   FileETag None',
     directories          => [
