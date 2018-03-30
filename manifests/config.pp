@@ -10,14 +10,6 @@ class profile_apache::config {
 
   notice ("client_server_name is: ${::profile_apache::client_server_name}")
 
-#  class { 'apache::mod::prefork':
-#    startservers        => '10',
-#    minspareservers     => '10',
-#    maxspareservers     => '20',
-#    serverlimit         => '256',
-#    maxclients          => '256',
-#    maxrequestsperchild => '100',
-#  }
   file_line { 'startservers':
     ensure => present,
     path   => '/etc/apache2/mods-enabled/prefork.conf',
@@ -271,6 +263,12 @@ class profile_apache::config {
     ssl_cert             => $::profile_apache::install::ssl_cert_path,
     ssl_key              => $::profile_apache::install::ssl_key_path,
     ssl_chain            => '/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt',
+    custom_fragment      => 'Header set Strict-Transport-Security "max-age=31536001"
+      Header set X-Frame-Options "SAMEORIGIN"
+      Header set X-XSS-Protection 1
+      Header set X-Content-Type-Options "nosniff
+      Header unset ETag
+      FileETag None',
     directories          => [
       { path           => $profile_apache::office_document_root,
         allow_override => [ 'ALL' ],
