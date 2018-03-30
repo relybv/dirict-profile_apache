@@ -264,11 +264,11 @@ class profile_apache::config {
     ssl_key              => $::profile_apache::install::ssl_key_path,
     ssl_chain            => '/etc/ssl/certs/Comodo_PositiveSSL_bundle.crt',
     custom_fragment      => 'Header set Strict-Transport-Security "max-age=31536001"
-      Header set X-Frame-Options "SAMEORIGIN"
-      Header set X-XSS-Protection 1
-      Header set X-Content-Type-Options "nosniff
-      Header unset ETag
-      FileETag None',
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection 1
+  Header set X-Content-Type-Options "nosniff
+  Header unset ETag
+  FileETag None',
     directories          => [
       { path           => $profile_apache::office_document_root,
         allow_override => [ 'ALL' ],
