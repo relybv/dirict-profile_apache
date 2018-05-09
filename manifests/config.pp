@@ -79,7 +79,7 @@ class profile_apache::config {
       file_line { 'session-save-path':
         ensure => present,
         path   => '/etc/php5/apache2/php.ini',
-        line   => 'session.save_path = tcp://172.17.20.101:6379',
+        line   => 'session.save_path = tcp://172.16.20.101:6379',
         match  => '^;session.save_path',
       }
       file_line { 'upload_max_filesize':
@@ -117,7 +117,7 @@ class profile_apache::config {
       file_line { 'session-save-path':
         ensure => present,
         path   => '/etc/php/7.0/apache2/php.ini',
-        line   => 'session.save_path = tcp://172.17.20.101:6379',
+        line   => 'session.save_path = tcp://172.16.20.101:6379',
         match  => '^;session.save_path',
       }
       file_line { 'upload_max_filesize':
@@ -138,7 +138,7 @@ class profile_apache::config {
       file_line { 'session-save-path':
         ensure => present,
         path   => '/etc/php/7.1/apache2/php.ini',
-        line   => 'session.save_path = tcp://172.17.20.101:6379',
+        line   => 'session.save_path = tcp://172.16.20.101:6379',
         match  => '^;session.save_path',
       }
       file_line { 'upload_max_filesize':
