@@ -148,7 +148,7 @@ class profile_apache::install {
     ssl_compression => false,
   }
 
-  if $::operatingsystemrelease != '9.3' {
+  if $::profile_apache::params::phpversion == '5.0' {
     # install libsodium
     exec { 'install-libsodium':
       path    => '/bin/:/sbin/:/usr/bin/:/usr/sbin/',
