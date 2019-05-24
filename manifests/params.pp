@@ -57,7 +57,7 @@ class profile_apache::params {
 
   case $::osfamily {
     'Debian': {
-      if $::operatingsystemrelease == '9.3' {
+      if $::operatingsystemmajrelease == '9' {
         case $phpversion {
           '7.0': { $packages = $php70_packages }
           '7.1': {
